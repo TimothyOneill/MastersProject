@@ -15,4 +15,6 @@ class MASTERSPROJECT_API UMainPlayerMovementComponent : public UPawnMovementComp
 
 public:
     virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+private:
+    const float Gravity = 9.8f;
 };

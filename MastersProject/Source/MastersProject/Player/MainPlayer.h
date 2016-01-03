@@ -4,7 +4,6 @@
 
 #include "GameFramework/Pawn.h"
 #include "MainPlayerMovementComponent.h"
-#include "MainPlayerCameraComponent.h"
 #include "MainPlayer.generated.h"
 
 UCLASS()
@@ -28,13 +27,17 @@ public:
     //Used to Return our custom input handler
     virtual UPawnMovementComponent* GetMovementComponent() const override;
 
-    void MoveForward(float AxisValue);
-    void MoveRight(float AxisValue);
-    void Turn(float AxisXValue);
+    void MoveY(float AxisYValue);
+    void MoveX(float AxisXValue);
+    void TurnCameraY(float AxisYValue);
+    void TurnCameraX(float AxisXValue);
 
-    UPROPERTY(EditAnywhere, Category = "Static Mesh")
     UStaticMesh* playerStaticMesh;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "SM Assets")
+    UStaticMeshComponent* playerVisual;
 
+private:
     UMainPlayerMovementComponent* OurMovementComponent;
-    UMainPlayerCameraComponent* OurCameraComponent;
+    USpringArmComponent* OurCameraSpringArm;
+    UCameraComponent* OurCameraComponent;
 };

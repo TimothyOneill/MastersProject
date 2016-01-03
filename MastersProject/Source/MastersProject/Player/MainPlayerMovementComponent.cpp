@@ -14,7 +14,9 @@ void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTic
     }
 
     //ConsumeInputVector gets and then clears the vector we set in MainPlayer::Tick
-    FVector movementVector = ConsumeInputVector().GetClampedToMaxSize(1.0f) * DeltaTime * 600.0f;
+    FVector movementVector(0, 0, -1);
+    movementVector += ConsumeInputVector().GetClampedToMaxSize(1.0f) * DeltaTime * 600.0f;
+    movementVector.Z *= Gravity;
 
     if (!movementVector.IsNearlyZero())
     {
@@ -24,6 +26,7 @@ void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTic
         //Apply Basic Sliding if we bump something.
         if (hitDetection.IsValidBlockingHit())
         {
+            
             SlideAlongSurface(movementVector, 1.0f - hitDetection.Time, hitDetection.Normal, hitDetection);
         }
     }
