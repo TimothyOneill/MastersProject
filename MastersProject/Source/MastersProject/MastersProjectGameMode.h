@@ -11,9 +11,9 @@
 UCLASS()
 class MASTERSPROJECT_API AMastersProjectGameMode : public AGameMode
 {
-	GENERATED_BODY()
-	
-	
-	
-	
+    GENERATED_BODY()
+public:
+    virtual void StartPlay() override;
+
+    AMastersProjectGameMode(const FObjectInitializer& ObjectInitializer);
 };

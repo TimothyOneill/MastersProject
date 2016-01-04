@@ -1,14 +1,14 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MastersProject.h"
 #include "MainPlayer.h"
+#include "IHeadMountedDisplay.h"
 
-
-// Sets default values
+//Sets default values
 AMainPlayer::AMainPlayer()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+    //Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+    PrimaryActorTick.bCanEverTick = true;
 
     //Capsule will be used as the root Component for collision
     UCapsuleComponent* capsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("RootComponent"));
@@ -16,7 +16,7 @@ AMainPlayer::AMainPlayer()
     capsuleComponent->InitCapsuleSize(40.0f, 150.0f);
     capsuleComponent->SetCollisionProfileName(TEXT("Pawn"));
     RootComponent = capsuleComponent;
-  
+
     //Setup the visual component of the player
     playerVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
     playerVisual->AttachTo(RootComponent);
@@ -31,8 +31,11 @@ AMainPlayer::AMainPlayer()
     OurMovementComponent->UpdatedComponent = RootComponent;
 
     OurCameraSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("DefaultSpringArmComponent"));
+    OurCameraSpringArm->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, 80.0f), FRotator(0.0f, 0.0f, 0.0f));
+    OurCameraSpringArm->TargetArmLength = 0.0f;
     OurCameraSpringArm->AttachTo(RootComponent);
-    OurCameraSpringArm->SetRelativeLocationAndRotation(FVector(0.0f, 40.0f, 0.0f), FRotator(0.0f, 0.0f, 0.0f));
+
+    //TODO Change so It is disabled for Occlus
     OurCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("DefaultCameraComponent"));
     OurCameraComponent->AttachTo(OurCameraSpringArm, USpringArmComponent::SocketName);
 
@@ -40,21 +43,21 @@ AMainPlayer::AMainPlayer()
     AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
-// Called when the game starts or when spawned
+//Called when the game starts or when spawned
 void AMainPlayer::BeginPlay()
 {
-	Super::BeginPlay();
-	
+    Super::BeginPlay();
 }
 
-// Called every frame
+//Called every frame
 void AMainPlayer::Tick( float DeltaTime )
 {
-	Super::Tick( DeltaTime );
-
+    //TODO Enable for Occlus Mode
+    //TurnOculus();
+    Super::Tick( DeltaTime );
 }
 
-// Called to bind functionality to input
+//Called to bind functionality to input
 void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
@@ -62,7 +65,7 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
     InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
     InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);
 
-	Super::SetupPlayerInputComponent(InputComponent);
+    Super::SetupPlayerInputComponent(InputComponent);
 }
 
 UPawnMovementComponent* AMainPlayer::GetMovementComponent() const
@@ -97,5 +100,17 @@ void AMainPlayer::TurnCameraX(float AxisXValue)
 {
     FRotator NewRotation = GetActorRotation();
     NewRotation.Yaw += AxisXValue;
-    SetActorRotation(NewRotation);
+    SetActorRotation(NewRotation);    
+}
+
+void AMainPlayer::TurnOculus()
+{
+    FQuat HMDOrientation;
+    FVector HMDPosition;
+
+    GEngine->HMDDevice->GetCurrentOrientationAndPosition(HMDOrientation, HMDPosition);
+
+    FRotator NewViewRotation = GetActorRotation();
+    NewViewRotation.Yaw = HMDOrientation.Rotator().Yaw;
+    SetActorRotation(NewViewRotation);
 }

@@ -5,15 +5,8 @@
 #include "Camera/PlayerCameraManager.h"
 #include "MainPlayerCameraManager.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MASTERSPROJECT_API AMainPlayerCameraManager : public APlayerCameraManager
 {
-	GENERATED_BODY()
-	
-	
-	
-	
+	GENERATED_BODY()	
 };

@@ -9,20 +9,20 @@
 UCLASS()
 class MASTERSPROJECT_API AMainPlayer : public APawn
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	AMainPlayer();
+    //Sets default values for this pawn's properties
+    AMainPlayer();
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
+    //Called when the game starts or when spawned
+    virtual void BeginPlay() override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+    //Called every frame
+    virtual void Tick( float DeltaSeconds ) override;
+
+    //Called to bind functionality to input
+    virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
     //Used to Return our custom input handler
     virtual UPawnMovementComponent* GetMovementComponent() const override;
@@ -31,6 +31,7 @@ public:
     void MoveX(float AxisXValue);
     void TurnCameraY(float AxisYValue);
     void TurnCameraX(float AxisXValue);
+    void TurnOculus();
 
     UStaticMesh* playerStaticMesh;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "SM Assets")

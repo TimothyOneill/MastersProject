@@ -2,7 +2,16 @@
 
 #include "MastersProject.h"
 #include "MastersProjectGameMode.h"
+#include "Player/MainPlayer.h"
 
+AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitalizer) : Super(ObjectInitalizer)
+{
+    DefaultPawnClass = AMainPlayer::StaticClass();
+}
 
+void AMastersProjectGameMode::StartPlay()
+{
+    Super::StartPlay();
 
-
+    StartMatch();
+}

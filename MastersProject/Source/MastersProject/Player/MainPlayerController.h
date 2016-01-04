@@ -5,13 +5,8 @@
 #include "GameFramework/PlayerController.h"
 #include "MainPlayerController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MASTERSPROJECT_API AMainPlayerController : public APlayerController
 {
-	GENERATED_BODY()
-	
-	
+    GENERATED_BODY()
 };
