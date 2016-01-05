@@ -11,20 +11,20 @@ AMainPlayer::AMainPlayer()
     PrimaryActorTick.bCanEverTick = true;
 
     //Capsule will be used as the root Component for collision
-    UCapsuleComponent* capsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("RootComponent"));
+    UCapsuleComponent* CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("RootComponent"));
     //TODO Change to get Sm size
-    capsuleComponent->InitCapsuleSize(40.0f, 150.0f);
-    capsuleComponent->SetCollisionProfileName(TEXT("Pawn"));
-    RootComponent = capsuleComponent;
+    CapsuleComponent->InitCapsuleSize(40.0f, 150.0f);
+    CapsuleComponent->SetCollisionProfileName(TEXT("Pawn"));
+    RootComponent = CapsuleComponent;
 
     //Setup the visual component of the player
-    playerVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-    playerVisual->AttachTo(RootComponent);
+    PlayerVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
+    PlayerVisual->AttachTo(RootComponent);
 
     //Nullptr Check if we have a mesh set it
-    if (playerStaticMesh)
+    if (PlayerStaticMesh)
     {
-        playerVisual->SetStaticMesh(playerStaticMesh);
+        PlayerVisual->SetStaticMesh(PlayerStaticMesh);
     }
 
     OurMovementComponent = CreateDefaultSubobject<UMainPlayerMovementComponent>(TEXT("CustomMovementComponent"));

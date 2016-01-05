@@ -33,9 +33,9 @@ public:
     void TurnCameraX(float AxisXValue);
     void TurnOculus();
 
-    UStaticMesh* playerStaticMesh;
+    UStaticMesh* PlayerStaticMesh;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "SM Assets")
-    UStaticMeshComponent* playerVisual;
+    UStaticMeshComponent* PlayerVisual;
 
 private:
     UMainPlayerMovementComponent* OurMovementComponent;

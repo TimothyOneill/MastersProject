@@ -3,6 +3,7 @@
 #include "MastersProject.h"
 #include "MastersProjectGameMode.h"
 #include "Player/MainPlayer.h"
+#include "Projectile/Asteroid.h"
 
 AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitalizer) : Super(ObjectInitalizer)
 {
