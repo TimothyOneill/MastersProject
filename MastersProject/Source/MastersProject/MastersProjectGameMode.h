@@ -4,6 +4,7 @@
 
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/GameMode.h"
+#include <unordered_set>
 #include "MastersProjectGameMode.generated.h"
 
 /**
@@ -14,10 +15,18 @@ class MASTERSPROJECT_API AMastersProjectGameMode : public AGameMode
 {
     GENERATED_BODY()
 public:
-    //Called when the game starts.
-    virtual void StartPlay() override;
 
     AMastersProjectGameMode(const FObjectInitializer& ObjectInitializer);
+
+    //Transitions to Waiting to Start.
+    virtual void StartPlay() override;
+    virtual void HandleMatchHasStarted();
+    virtual void HandleMatchHasEnded();
+
+    void RestartGameTimer();
+    void StopGameTimer();
+    void ChangeTestScenario();
+    void GenerateTestOrder();
 
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
     void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
@@ -35,7 +44,9 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Main Menu")
     TSubclassOf<UUserWidget> StartingWidgetClass;
-
     UPROPERTY()
     UUserWidget* CurrentWidget;
+    FTimerHandle GameTimerHandle;
+    std::unordered_set<int> TestOrder;
+    float GameTimer = 5.0f;
 };

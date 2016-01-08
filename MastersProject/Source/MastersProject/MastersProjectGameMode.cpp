@@ -12,7 +12,57 @@ AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& Objec
 void AMastersProjectGameMode::StartPlay()
 {
     Super::StartPlay();
+    GenerateTestOrder();
     ChangeMenuWidget(StartingWidgetClass);
+}
+
+void AMastersProjectGameMode::HandleMatchHasStarted()
+{
+    Super::HandleMatchHasStarted();
+    RestartGameTimer();
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Game Mode Starting"));
+}
+
+void AMastersProjectGameMode::HandleMatchHasEnded()
+{
+    Super::HandleMatchHasEnded();
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Game Mode Ended"));
+}
+
+void AMastersProjectGameMode::RestartGameTimer()
+{
+    GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AMastersProjectGameMode::ChangeTestScenario, GameTimer, true);
+}
+
+void AMastersProjectGameMode::StopGameTimer()
+{
+    GetWorldTimerManager().ClearTimer(GameTimerHandle);
+}
+
+void AMastersProjectGameMode::ChangeTestScenario()
+{
+    switch (*TestOrder.begin())
+    {
+        case 0 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 1"));
+        break;
+        case 1 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 2"));
+        break;
+        case 2 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 3"));
+        break;
+        case 3 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 4"));
+        break;
+        case 4 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 5"));
+        break;
+        default : StopGameTimer(), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("End of Test Session!"));
+    }
+}
+
+void AMastersProjectGameMode::GenerateTestOrder()
+{
+    while (TestOrder.size() != 5)
+    {
+        TestOrder.insert(FMath::RandRange(0, 4));
+    }
 }
 
 void AMastersProjectGameMode::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)

@@ -25,11 +25,8 @@ public:
     virtual void Tick( float DeltaSeconds ) override;
 
     void RestartSpawnTimer();
-
     void StopSpawnTimer();
-
     void SpawnAsteroid();
-
     void CalculateNextPosition();
 
     float SpawnTimer = 3.0f;
