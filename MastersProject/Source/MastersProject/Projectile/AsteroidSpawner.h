@@ -38,4 +38,6 @@ public:
     FTimerHandle LocationTimerHandle;
     FTimerHandle SpawnerTimerHandle;
     std::vector<AAsteroid*> asteroids;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Target")
+    AActor* target;
 };

@@ -12,8 +12,7 @@ AMainPlayer::AMainPlayer()
 
     //Capsule will be used as the root Component for collision
     UCapsuleComponent* CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("RootComponent"));
-    //TODO Change to get Sm size
-    CapsuleComponent->InitCapsuleSize(40.0f, 150.0f);
+    CapsuleComponent->InitCapsuleSize(60.0f, 150.0f);
     CapsuleComponent->SetCollisionProfileName(TEXT("Pawn"));
     RootComponent = CapsuleComponent;
 
@@ -35,7 +34,6 @@ AMainPlayer::AMainPlayer()
     OurCameraSpringArm->TargetArmLength = 0.0f;
     OurCameraSpringArm->AttachTo(RootComponent);
 
-    //TODO Change so It is disabled for Occlus
     OurCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("DefaultCameraComponent"));
     OurCameraComponent->AttachTo(OurCameraSpringArm, USpringArmComponent::SocketName);
 
@@ -52,7 +50,6 @@ void AMainPlayer::BeginPlay()
 //Called every frame
 void AMainPlayer::Tick( float DeltaTime )
 {
-    //TODO Enable for Occlus Mode
     //TurnOculus();
     Super::Tick( DeltaTime );
 }

@@ -30,6 +30,6 @@ public:
 
 private:
     FVector Target = FVector(0.0f,0.0f,0.0f);
-    FVector DirectionVector;
+    FVector DirectionVector = FVector(0.0f, 0.0f, 0.0f);
     const float Speed = 0.15f;
 };

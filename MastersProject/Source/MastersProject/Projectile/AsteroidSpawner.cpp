@@ -48,7 +48,7 @@ void AAsteroidSpawner::SpawnAsteroid()
 {
     //Temporary Required or ERROR:C4238 occurs
     AAsteroid* CreatedAsteroid = GetWorld()->SpawnActor<AAsteroid>(GetActorLocation(), FRotator(0,0,0));
-    CreatedAsteroid->Init(FVector(0,0,0));
+    CreatedAsteroid->Init(target->GetActorLocation());
 
     //Check to make sure asteroid was spawned correctly.
     if (CreatedAsteroid)

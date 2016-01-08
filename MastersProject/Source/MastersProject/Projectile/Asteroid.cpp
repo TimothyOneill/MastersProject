@@ -14,30 +14,28 @@ AAsteroid::AAsteroid()
     RootComponent = AsteroidVisual;
     AsteroidVisual->SetWorldScale3D(FVector(0.8f));
 
-    OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
-    SetActorEnableCollision(true);
     //TODO Find a better way to bind a SM to C++ Class file
     static ConstructorHelpers::FObjectFinder<UStaticMesh> AsteroidVisualAsset(TEXT("/Game/StarterContent/Props/asteroid_OBJ.asteroid_OBJ"));
     if (AsteroidVisualAsset.Succeeded())
     {
        AsteroidVisual->SetStaticMesh(AsteroidVisualAsset.Object);
-       //TODO Make Object Bigger in Maya
-       AsteroidVisual->SetWorldScale3D(FVector(2.0f));
+       AsteroidVisual->SetWorldScale3D(FVector(3.0f));
     }
 }
 
 void AAsteroid::Init(FVector InitTarget)
 {
+    OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
     Target = InitTarget;
+    DirectionVector = (GetActorLocation() - Target);
+    DirectionVector.GetSafeNormal();
+    FRotator Rotation = FRotationMatrix::MakeFromX(DirectionVector).Rotator();
+    SetActorRotation(Rotation);
 }
 
 // Called when the game starts or when spawned
 void AAsteroid::BeginPlay()
 {
-    DirectionVector = (GetActorLocation() - Target);
-    DirectionVector.GetSafeNormal();
-    FRotator Rotation = FRotationMatrix::MakeFromX(DirectionVector).Rotator();
-    SetActorRotation(Rotation);
     Super::BeginPlay();
 }
 
@@ -51,6 +49,6 @@ void AAsteroid::Tick( float DeltaTime )
 
 void AAsteroid::OnCollision(AActor *SelfActor, AActor *OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DeleteIng Asteroid!"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid!"));
     Destroy();
 }

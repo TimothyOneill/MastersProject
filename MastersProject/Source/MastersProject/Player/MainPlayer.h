@@ -41,4 +41,5 @@ private:
     UMainPlayerMovementComponent* OurMovementComponent;
     USpringArmComponent* OurCameraSpringArm;
     UCameraComponent* OurCameraComponent;
+    bool OculusEnabled = false;
 };
