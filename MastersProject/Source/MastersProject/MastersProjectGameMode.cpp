@@ -5,28 +5,25 @@
 #include "Player/MainPlayer.h"
 #include "Projectile/Asteroid.h"
 
-AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitalizer) : Super(ObjectInitalizer)
-{
-}
+AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitalizer) : Super(ObjectInitalizer) {}
 
 void AMastersProjectGameMode::StartPlay()
 {
     Super::StartPlay();
     GenerateTestOrder();
-    ChangeMenuWidget(StartingWidgetClass);
 }
 
 void AMastersProjectGameMode::HandleMatchHasStarted()
 {
     Super::HandleMatchHasStarted();
     RestartGameTimer();
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Game Mode Starting"));
 }
 
 void AMastersProjectGameMode::HandleMatchHasEnded()
 {
     Super::HandleMatchHasEnded();
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Game Mode Ended"));
+    StopGameTimer();
+    UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
 }
 
 void AMastersProjectGameMode::RestartGameTimer()
@@ -53,7 +50,7 @@ void AMastersProjectGameMode::ChangeTestScenario()
         break;
         case 4 : TestOrder.erase(TestOrder.begin()), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Test Number 5"));
         break;
-        default : StopGameTimer(), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("End of Test Session!"));
+        default : StopGameTimer(), SetMatchState(MatchState::WaitingPostMatch), GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("End of Test Session!"));
     }
 }
 
@@ -63,45 +60,4 @@ void AMastersProjectGameMode::GenerateTestOrder()
     {
         TestOrder.insert(FMath::RandRange(0, 4));
     }
-}
-
-void AMastersProjectGameMode::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)
-{
-    if (CurrentWidget != nullptr)
-    {
-        CurrentWidget->RemoveFromViewport();
-        CurrentWidget = nullptr;
-    }
-    if (NewWidgetClass != nullptr)
-    {
-        CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), NewWidgetClass);
-        if (CurrentWidget != nullptr)
-        {
-            CurrentWidget->AddToViewport();
-        }
-    }
-}
-
-void AMastersProjectGameMode::LaunchDefaultGame()
-{
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in NON STEREO"));
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
-}
-
-void AMastersProjectGameMode::LaunchVRGame()
-{
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in STEREO"));
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
-}
-
-void AMastersProjectGameMode::LaunchDefaultDemo()
-{
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in Default demo mode"));
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
-}
-
-void AMastersProjectGameMode::LaunchVRDemo()
-{
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in VR demo mode"));
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
 }

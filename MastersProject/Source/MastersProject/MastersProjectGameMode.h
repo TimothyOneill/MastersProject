@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Blueprint/UserWidget.h"
 #include "GameFramework/GameMode.h"
 #include <unordered_set>
 #include "MastersProjectGameMode.generated.h"
@@ -28,24 +27,8 @@ public:
     void ChangeTestScenario();
     void GenerateTestOrder();
 
-    UFUNCTION(BlueprintCallable, Category = "Main Menu")
-    void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
-
-    UFUNCTION(BlueprintCallable, Category = "Main Menu")
-    void LaunchDefaultGame();
-    UFUNCTION(BlueprintCallable, Category = "Main Menu")
-    void LaunchVRGame();
-    UFUNCTION(BlueprintCallable, Category = "Main Menu")
-    void LaunchDefaultDemo();
-    UFUNCTION(BlueprintCallable, Category = "Main Menu")
-    void LaunchVRDemo();
-
 protected:
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Main Menu")
-    TSubclassOf<UUserWidget> StartingWidgetClass;
-    UPROPERTY()
-    UUserWidget* CurrentWidget;
     FTimerHandle GameTimerHandle;
     std::unordered_set<int> TestOrder;
     float GameTimer = 5.0f;
