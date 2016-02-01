@@ -50,7 +50,11 @@ void AMainPlayer::BeginPlay()
 //Called every frame
 void AMainPlayer::Tick( float DeltaTime )
 {
-    //TurnOculus();
+
+    if (GEngine->HMDDevice.IsValid() && GEngine->HMDDevice->IsStereoEnabled())
+    {
+        TurnOculus();
+    }
     Super::Tick( DeltaTime );
 }
 
@@ -59,9 +63,11 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
 {
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
-    InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
-    InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);
-
+    if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabled())
+    {
+        InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
+        InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);
+    }
     Super::SetupPlayerInputComponent(InputComponent);
 }
 

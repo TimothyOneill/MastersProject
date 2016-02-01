@@ -31,6 +31,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
     void LaunchVRDemo();
 
+    void EnableVirtualReality(bool val);
+
 protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Main Menu")
