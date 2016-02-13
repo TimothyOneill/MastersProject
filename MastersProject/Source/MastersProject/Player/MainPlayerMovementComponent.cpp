@@ -26,10 +26,8 @@ void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTic
         //Apply Basic Sliding if we bump something.
         if (hitDetection.IsValidBlockingHit())
         {
-            
+
             SlideAlongSurface(movementVector, 1.0f - hitDetection.Time, hitDetection.Normal, hitDetection);
         }
     }
 }
-
-

@@ -44,13 +44,17 @@ AMainPlayer::AMainPlayer()
 //Called when the game starts or when spawned
 void AMainPlayer::BeginPlay()
 {
+    if (GEngine->HMDDevice.IsValid() && GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
+    {
+        OurCameraSpringArm->DestroyComponent();
+        OurCameraComponent->DestroyComponent();
+    }
     Super::BeginPlay();
 }
 
 //Called every frame
 void AMainPlayer::Tick( float DeltaTime )
 {
-
     if (GEngine->HMDDevice.IsValid() && GEngine->HMDDevice->IsStereoEnabled())
     {
         TurnOculus();
@@ -63,7 +67,8 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
 {
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
-    //if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabled())
+
+    if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
     {
         InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
         InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);
