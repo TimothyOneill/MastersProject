@@ -1,0 +1,51 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "GameFramework/WorldSettings.h"
+#include "MastersProjectWorldSettings.generated.h"
+
+USTRUCT()
+struct FSpecificProjectSettings
+{
+    GENERATED_USTRUCT_BODY()
+
+    /**Used to Adjust the time for each each step of the whole experiment runs*/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
+    float GameTimer;
+
+    /**Used to adjust the total number of steps of the whole experiment*/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
+    int32 NumExperiments;
+
+    /**Used to Set the filename to use for outputing the collected metrics*/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
+    FString File;
+
+    FSpecificProjectSettings() : GameTimer(300.0f), NumExperiments(5), File("DiscreteMetrics.txt") {}
+};
+
+
+UCLASS()
+class MASTERSPROJECT_API AMastersProjectWorldSettings : public AWorldSettings
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnyWhere, Category = ExperimentSettings)
+    struct FSpecificProjectSettings ExperimentSettings;
+public:
+    float GetGameTimer()
+    {
+        return ExperimentSettings.GameTimer;
+    }
+
+    int32 GetNumExperiments()
+    {
+        return ExperimentSettings.NumExperiments;
+    }
+
+    FString GetFile()
+    {
+        return ExperimentSettings.File;
+    }
+};
