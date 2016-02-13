@@ -2,7 +2,7 @@
 
 #include "MastersProject.h"
 #include "Asteroid.h"
-
+#include "../MetricTracker.h"
 
 // Sets default values
 AAsteroid::AAsteroid()
@@ -26,6 +26,7 @@ AAsteroid::AAsteroid()
 void AAsteroid::Init(FVector InitTarget)
 {
     OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
+    OnActorBeginOverlap.AddDynamic(this, &AAsteroid::OnOverlap);
     Target = InitTarget;
     DirectionVector = (GetActorLocation() - Target);
     DirectionVector.GetSafeNormal();
@@ -47,8 +48,20 @@ void AAsteroid::Tick( float DeltaTime )
     SetActorLocation(NewLocation);
 }
 
-void AAsteroid::OnCollision(AActor *SelfActor, AActor *OtherActor, FVector NormalImpulse, const FHitResult& Hit)
+void AAsteroid::OnCollision(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid!"));
+    MetricTracker::Instance()->ReportDiscreteMetric("Hit", 1);
     Destroy();
+}
+
+//Required due a bug I found in UE4 UE-26257
+void AAsteroid::OnOverlap(AActor* OtherActor)
+{
+    if (OtherActor && (OtherActor != this))
+    {
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid that hit Platform!"));
+        MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
+        Destroy();
+    }
 }

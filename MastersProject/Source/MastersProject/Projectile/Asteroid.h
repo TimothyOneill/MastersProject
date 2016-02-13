@@ -23,6 +23,8 @@ public:
 
     UFUNCTION()
     virtual void OnCollision(AActor *SelfActor, AActor *OtherActor, FVector NormalImpulse, const FHitResult& Hit);
+    UFUNCTION()
+    virtual void OnOverlap(AActor* OtherActor);
 
     UStaticMesh* AsteroidStaticMesh;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "SM Assets")

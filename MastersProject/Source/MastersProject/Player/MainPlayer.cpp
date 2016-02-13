@@ -63,7 +63,7 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
 {
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
-    if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabled())
+    //if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabled())
     {
         InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
         InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);
