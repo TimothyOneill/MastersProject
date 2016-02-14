@@ -3,19 +3,18 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
-#include <unordered_set>
-#include "MastersProjectGameMode.generated.h"
+#include "MastersProjectDemoMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MASTERSPROJECT_API AMastersProjectGameMode : public AGameMode
+class MASTERSPROJECT_API AMastersProjectDemoMode : public AGameMode
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 public:
 
-    AMastersProjectGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {};
+    AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {};
 
     //Transitions to Waiting to Start.
     virtual void StartPlay() override;
@@ -24,13 +23,9 @@ public:
 
     void RestartGameTimer();
     void StopGameTimer();
-    void ChangeTestScenario();
-    void GenerateTestOrder();
 
 protected:
 
     FTimerHandle GameTimerHandle;
-    std::unordered_set<int> TestOrder;
     float GameTimer = 5.0f;
-    int32 NumExperiments = 1;
 };

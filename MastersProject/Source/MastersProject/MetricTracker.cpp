@@ -78,7 +78,6 @@ void MetricTracker::WriteMetricsToFile()
 
 void MetricTracker::ClearMetrics()
 {
-    SectionName = "";
     ContinuousValues.clear();
     DiscreteValues.clear();
 }

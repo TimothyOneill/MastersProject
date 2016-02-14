@@ -31,6 +31,7 @@ public:
     void MoveX(float AxisXValue);
     void TurnCameraY(float AxisYValue);
     void TurnCameraX(float AxisXValue);
+    void PauseGame();
     void TurnOculus();
 
     UStaticMesh* PlayerStaticMesh;

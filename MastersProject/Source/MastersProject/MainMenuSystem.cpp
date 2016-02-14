@@ -46,16 +46,16 @@ void AMainMenuSystem::LaunchVRGame()
 
 void AMainMenuSystem::LaunchDefaultDemo()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in Default demo mode"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in NON STEREO demo mode"));
     EnableVirtualReality(false);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
+    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
 }
 
 void AMainMenuSystem::LaunchVRDemo()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in VR demo mode"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in STEREO demo mode"));
     EnableVirtualReality(true);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
+    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
 }
 
 void AMainMenuSystem::EnableVirtualReality(bool val)
