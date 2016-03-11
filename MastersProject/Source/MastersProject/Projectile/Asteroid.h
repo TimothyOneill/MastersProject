@@ -15,6 +15,8 @@ public:
     AAsteroid();
     void Init(FVector Target);
 
+    void Destroyed() override;
+
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
@@ -26,12 +28,18 @@ public:
     UFUNCTION()
     virtual void OnOverlap(AActor* OtherActor);
 
+    void ShowMarker() { Marker->SetActorHiddenInGame(false); };
+    void HideMarker() { Marker->SetActorHiddenInGame(true); };
+
     UStaticMesh* AsteroidStaticMesh;
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "SM Assets")
+    UPROPERTY(VisibleAnywhere, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
     UStaticMeshComponent* AsteroidVisual;
+    UPROPERTY(EditAnywhere, Category = "Marker", meta = (AllowPrivateAccess = "true"))
+    TSubclassOf<AActor> MarkerBP;
 
 private:
     FVector Target = FVector(0.0f,0.0f,0.0f);
     FVector DirectionVector = FVector(0.0f, 0.0f, 0.0f);
-    const float Speed = 0.15f;
+    AActor* Marker;
+    const float Speed = 0.3f;
 };

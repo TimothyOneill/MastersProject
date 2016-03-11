@@ -12,31 +12,38 @@ AAsteroid::AAsteroid()
 
     AsteroidVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
     RootComponent = AsteroidVisual;
-    AsteroidVisual->SetWorldScale3D(FVector(0.8f));
 
-    //TODO Find a better way to bind a SM to C++ Class file
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> AsteroidVisualAsset(TEXT("/Game/StarterContent/Props/asteroid_OBJ.asteroid_OBJ"));
-    if (AsteroidVisualAsset.Succeeded())
+    if (AsteroidStaticMesh)
     {
-       AsteroidVisual->SetStaticMesh(AsteroidVisualAsset.Object);
-       AsteroidVisual->SetWorldScale3D(FVector(3.0f));
+        AsteroidVisual->SetStaticMesh(AsteroidStaticMesh);
+    }
+}
+
+void AAsteroid::Destroyed()
+{
+    if (Marker)
+    {
+        Marker->Destroy();
     }
 }
 
 void AAsteroid::Init(FVector InitTarget)
 {
-    OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
-    OnActorBeginOverlap.AddDynamic(this, &AAsteroid::OnOverlap);
     Target = InitTarget;
     DirectionVector = (GetActorLocation() - Target);
     DirectionVector.GetSafeNormal();
     FRotator Rotation = FRotationMatrix::MakeFromX(DirectionVector).Rotator();
+    Marker = SpawnBP<AActor>(GetWorld(), MarkerBP, FVector(Target.X, Target.Y, 12), FRotator(0, 0, 0));
+    Marker->SetActorEnableCollision(false);
+    Marker->SetActorHiddenInGame(true);
     SetActorRotation(Rotation);
 }
 
 // Called when the game starts or when spawned
 void AAsteroid::BeginPlay()
 {
+    OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
+    OnActorBeginOverlap.AddDynamic(this, &AAsteroid::OnOverlap);
     Super::BeginPlay();
 }
 
@@ -50,8 +57,10 @@ void AAsteroid::Tick( float DeltaTime )
 
 void AAsteroid::OnCollision(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid!"));
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid!"));
     MetricTracker::Instance()->ReportDiscreteMetric("Hit", 1);
+    MetricTracker::Instance()->ClearSpecificDiscreteMetric("Streak");
+    MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "1,");
     Destroy();
 }
 
@@ -60,8 +69,10 @@ void AAsteroid::OnOverlap(AActor* OtherActor)
 {
     if (OtherActor && (OtherActor != this))
     {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid that hit Platform!"));
+        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid that hit Platform!"));
         MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
+        MetricTracker::Instance()->ReportDiscreteMetric("Streak", 1);
+        MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "0,");
         Destroy();
     }
 }

@@ -76,10 +76,20 @@ void MetricTracker::WriteMetricsToFile()
     File.close();
 }
 
-void MetricTracker::ClearMetrics()
+void MetricTracker::ClearAllMetrics()
 {
     ContinuousValues.clear();
     DiscreteValues.clear();
+}
+
+void MetricTracker::ClearSpecificDiscreteMetric(FString key)
+{
+    DiscreteValues.erase(*(key));
+}
+
+void MetricTracker::ClearSpecificContinuousMetric(FString key)
+{
+    ContinuousValues.erase(*(key));
 }
 
 FString MetricTracker::GetSectionName()

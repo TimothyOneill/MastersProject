@@ -12,7 +12,9 @@ public:
     void ReportContinousMetric(FString key, FString value);
 
     void WriteMetricsToFile();
-    void ClearMetrics();
+    void ClearAllMetrics();
+    void ClearSpecificDiscreteMetric(FString key);
+    void ClearSpecificContinuousMetric(FString key);
 
     FString GetSectionName();
     void SetSectionName(FString NewSectionName);

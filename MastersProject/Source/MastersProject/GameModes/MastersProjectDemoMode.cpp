@@ -21,7 +21,7 @@ void AMastersProjectDemoMode::HandleMatchHasEnded()
 {
     Super::HandleMatchHasEnded();
     StopGameTimer();
-    MetricTracker::Instance()->ClearMetrics();
+    MetricTracker::Instance()->ClearAllMetrics();
     UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
 }
 

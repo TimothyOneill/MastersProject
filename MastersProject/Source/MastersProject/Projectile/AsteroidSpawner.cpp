@@ -8,15 +8,10 @@ AAsteroidSpawner::AAsteroidSpawner()
 {
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
-
-    USphereComponent* TempSpawnerVisual = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
-    RootComponent = TempSpawnerVisual;
+    //Required to place in the world.
+    SpawnerVisual = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+    RootComponent = SpawnerVisual;
     SetActorEnableCollision(false);
-}
-
-void AAsteroidSpawner::Init()
-{
-
 }
 
 // Called when the game starts or when spawned
@@ -46,15 +41,34 @@ void AAsteroidSpawner::StopSpawnTimer()
 
 void AAsteroidSpawner::SpawnAsteroid()
 {
-    //Temporary Required or ERROR:C4238 occurs
-    AAsteroid* CreatedAsteroid = GetWorld()->SpawnActor<AAsteroid>(GetActorLocation(), FRotator(0,0,0));
-    CreatedAsteroid->Init(target->GetActorLocation());
+    AAsteroid* CreatedAsteroid = SpawnBP<AAsteroid>(GetWorld(), AsteroidBP, GetActorLocation(), FRotator(0, 0, 0));
+
+    switch (TargetType)
+    {
+    case ETargetEnum::TT_Direct : CreatedAsteroid->Init(target->GetActorLocation());
+        break;
+    case ETargetEnum::TT_Around : CreatedAsteroid->Init(CalculateAroundTarget());
+        break;
+    default: CreatedAsteroid->Init(FVector(0, 0, 0));
+        break;
+    }
 
     //Check to make sure asteroid was spawned correctly.
     if (CreatedAsteroid)
     {
         asteroids.push_back(CreatedAsteroid);
     }
+}
+
+FVector AAsteroidSpawner::CalculateAroundTarget()
+{
+    FVector Origin;
+    FVector BoundsExtent;
+    target->GetActorBounds(false, Origin, BoundsExtent);
+    float XRange = BoundsExtent.X /2;
+    float YRange = BoundsExtent.Y /2;
+
+    return FVector(FMath::RandRange(Origin.X - XRange, Origin.X + XRange), FMath::RandRange(Origin.Y - YRange, Origin.Y + YRange), Origin.Z);
 }
 
 void AAsteroidSpawner::CalculateNextPosition()
