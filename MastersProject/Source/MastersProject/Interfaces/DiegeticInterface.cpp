@@ -5,10 +5,16 @@
 
 UDiegeticInterface::UDiegeticInterface()
 {
-    static ConstructorHelpers::FObjectFinder<UBlueprint> BluePrint(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/HandScaner.HandScaner'"));
-    if (BluePrint.Object)
+    static ConstructorHelpers::FObjectFinder<UBlueprint> HandScanner(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/HandScaner.HandScaner'"));
+    if (HandScanner.Object)
     {
-        HandScannerBP = (UClass*)BluePrint.Object->GeneratedClass;
+        HandScannerBP = (UClass*)HandScanner.Object->GeneratedClass;
+    }
+
+    static ConstructorHelpers::FObjectFinder<UBlueprint> InterfaceVisual(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Radar_Marker.Radar_Marker'"));
+    if (InterfaceVisual.Object)
+    {
+        InterfaceVisualBP = (UClass*)InterfaceVisual.Object->GeneratedClass;
     }
 }
 
@@ -22,12 +28,15 @@ void UDiegeticInterface::Init()
 
 void UDiegeticInterface::Tick(float DeltaTime)
 {
-    if (!PendingMarks.empty())
+    if (InterfaceMarks.size() < 10)
     {
+        AInterfaceMarker* CreatedMark = SpawnBP<AInterfaceMarker>(GWorld, InterfaceVisualBP, FVector(0, 0, 40), FRotator(0, 0, 0));
         //Get Current Asteroid at the top and spawn marker suitably relative to the player.
-        AInterfaceMarker* CreatedMark = SpawnBP<AInterfaceMarker>(GetWorld(), InterfaceVisualBP, FVector(0, 0, 0), FRotator(0, 0, 0));
         if (CreatedMark)
         {
+            CreatedMark->Init();
+            CreatedMark->AttachRootComponentToActor(DiegeticModel);
+            CreatedMark->SetActorLocation(CreatedMark->GetActorLocation()+FVector(46.2f, -32, 40));
             InterfaceMarks.push_back(CreatedMark);
         }
     }

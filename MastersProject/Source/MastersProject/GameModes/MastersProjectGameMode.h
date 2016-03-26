@@ -9,11 +9,7 @@
 #include "Projectile/Asteroid.h"
 #include "MastersProjectWorldSettings.h"
 #include "MetricTracker.h"
-#include "InterfaceManager.h"
-#include "Interfaces/SpatialInterface.h"
-#include "Interfaces/DiegeticInterface.h"
-#include "Interfaces/NonDiegeticInterface.h"
-#include "Interfaces/MetaInterface.h"
+#include "Interfaces/InterfaceManager.h"
 #include "MastersProjectGameMode.generated.h"
 
 /**
@@ -40,11 +36,7 @@ public:
 protected:
 
     FTimerHandle GameTimerHandle;
-    InterfaceManager* _InterfaceManager;
-    USpatialInterface* SpatialInterface;
     UDiegeticInterface* DiegeticInterface;
-    UNonDiegeticInterface* NonDiegeticInterface;
-    std::vector<UObject*> Interfaces;
     std::unordered_set<int> TestOrder;
     float GameTimer = 5.0f;
     int32 NumExperiments = 1;

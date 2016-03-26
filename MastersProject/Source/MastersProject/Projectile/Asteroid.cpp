@@ -11,6 +11,7 @@ AAsteroid::AAsteroid()
     PrimaryActorTick.bCanEverTick = true;
 
     AsteroidVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
+    AsteroidVisual->SetCastShadow(false);
     RootComponent = AsteroidVisual;
 
     if (AsteroidStaticMesh)
