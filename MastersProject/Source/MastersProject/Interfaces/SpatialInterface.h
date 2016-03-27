@@ -13,6 +13,7 @@ public:
     USpatialInterface();
     void EnableTick() { bTick = true; };
     void DisableTick() { bTick = false; };
+    void HideMarkers();
 
 private:
     virtual void Tick(float DeltaTime) override;

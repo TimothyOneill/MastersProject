@@ -1,7 +1,4 @@
 #pragma once
-#include "InterfaceMarker.h"
-#include <deque>
-#include <vector>
 #include "DiegeticInterface.generated.h"
 
 /**
@@ -19,20 +16,17 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DiegeticModel")
     TSubclassOf<AActor> HandScannerBP;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InterfaceVisual")
-    TSubclassOf<AActor> InterfaceVisualBP;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "3D-Widget")
     TSubclassOf<AActor> WidgetBP;
 private:
-    virtual void Tick(float DeltaTime) override;
+    virtual void Tick(float DeltaTime) override {};
     virtual bool IsTickable() const override;
     virtual TStatId GetStatId() const override;
+    virtual void BeginDestroy() override;
 
     bool bTick = false;
 
     AActor* DiegeticModel;
     AActor* Interface3D;
-    std::deque<AActor*> PendingMarks;
-    std::vector<AInterfaceMarker*> InterfaceMarks;
     APlayerController* OwningPlayer;
 };

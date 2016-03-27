@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
+#include "Interfaces/InterfaceManager.h"
 #include "MastersProjectDemoMode.generated.h"
 
 /**
@@ -14,7 +15,7 @@ class MASTERSPROJECT_API AMastersProjectDemoMode : public AGameMode
 	GENERATED_BODY()
 public:
 
-    AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {};
+    AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer);
 
     //Transitions to Waiting to Start.
     virtual void StartPlay() override;
@@ -23,9 +24,12 @@ public:
 
     void RestartGameTimer();
     void StopGameTimer();
+    void ChangeTestScenario();
 
 protected:
 
+    InterfaceManager* Interfaces;
     FTimerHandle GameTimerHandle;
     float GameTimer = 5.0f;
+    int CurrentInterface = 0;
 };

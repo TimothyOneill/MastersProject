@@ -8,6 +8,14 @@ USpatialInterface::USpatialInterface()
 
 }
 
+void USpatialInterface::HideMarkers()
+{
+    for (TActorIterator<AAsteroid> ActorItr(GWorld); ActorItr; ++ActorItr)
+    {
+        ActorItr->HideMarker();
+    }
+}
+
 void USpatialInterface::Tick(float DeltaTime)
 {
     for (TActorIterator<AAsteroid> ActorItr(GWorld); ActorItr; ++ActorItr)

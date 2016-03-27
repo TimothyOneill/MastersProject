@@ -35,8 +35,8 @@ public:
 
 protected:
 
+    InterfaceManager* Interfaces;
     FTimerHandle GameTimerHandle;
-    UDiegeticInterface* DiegeticInterface;
     std::unordered_set<int> TestOrder;
     float GameTimer = 5.0f;
     int32 NumExperiments = 1;

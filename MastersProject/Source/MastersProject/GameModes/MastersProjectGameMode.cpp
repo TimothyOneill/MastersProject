@@ -5,18 +5,12 @@
 
 AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-    DiegeticInterface = NewObject<UDiegeticInterface>(UDiegeticInterface::StaticClass());
-    static ConstructorHelpers::FClassFinder<AHUD> HUDtest(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/NonDiegetic_Interface.NonDiegetic_Interface_C'"));
-    if (HUDtest.Class != NULL) 
-    {
-        HUDClass = HUDtest.Class;
-    }
+    Interfaces = new InterfaceManager();
 }
 
 void AMastersProjectGameMode::StartPlay()
 {
     Super::StartPlay();
-    DiegeticInterface->Init();
     NumExperiments = Cast<AMastersProjectWorldSettings>(GetWorld()->GetWorldSettings())->GetNumExperiments();
     GenerateTestOrder();
     ChangeTestScenario();
@@ -48,6 +42,22 @@ void AMastersProjectGameMode::StopGameTimer()
 
 void AMastersProjectGameMode::ChangeTestScenario()
 {
+    switch (*TestOrder.begin())
+    {
+    
+    case 0 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_DiegeticInterface), MetricTracker::Instance()->SetSectionName("Digetic Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+        break;
+    case 1 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NonDiegeticInterface), MetricTracker::Instance()->SetSectionName("Non Digetic Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+        break;
+    case 2 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_MetaInterface), MetricTracker::Instance()->SetSectionName("Spatial Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+        break;
+    case 3 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_SpatialInterface), MetricTracker::Instance()->SetSectionName("Meta Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+        break;
+    case 4 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NoInterface), MetricTracker::Instance()->SetSectionName("No Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+        break;
+    default : StopGameTimer(), SetMatchState(MatchState::WaitingPostMatch);
+        break;
+    }
 }
 
 void AMastersProjectGameMode::GenerateTestOrder()
