@@ -21,6 +21,8 @@ public:
     TSubclassOf<AActor> HandScannerBP;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InterfaceVisual")
     TSubclassOf<AActor> InterfaceVisualBP;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "3D-Widget")
+    TSubclassOf<AActor> WidgetBP;
 private:
     virtual void Tick(float DeltaTime) override;
     virtual bool IsTickable() const override;
@@ -29,6 +31,7 @@ private:
     bool bTick = false;
 
     AActor* DiegeticModel;
+    AActor* Interface3D;
     std::deque<AActor*> PendingMarks;
     std::vector<AInterfaceMarker*> InterfaceMarks;
     APlayerController* OwningPlayer;

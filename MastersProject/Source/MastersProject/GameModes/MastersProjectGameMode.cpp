@@ -6,7 +6,7 @@
 AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
     DiegeticInterface = NewObject<UDiegeticInterface>(UDiegeticInterface::StaticClass());
-    static ConstructorHelpers::FClassFinder<AHUD> HUDtest(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Meta_Interface.Meta_Interface_C'"));
+    static ConstructorHelpers::FClassFinder<AHUD> HUDtest(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/NonDiegetic_Interface.NonDiegetic_Interface_C'"));
     if (HUDtest.Class != NULL) 
     {
         HUDClass = HUDtest.Class;
@@ -16,6 +16,7 @@ AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& Objec
 void AMastersProjectGameMode::StartPlay()
 {
     Super::StartPlay();
+    DiegeticInterface->Init();
     NumExperiments = Cast<AMastersProjectWorldSettings>(GetWorld()->GetWorldSettings())->GetNumExperiments();
     GenerateTestOrder();
     ChangeTestScenario();

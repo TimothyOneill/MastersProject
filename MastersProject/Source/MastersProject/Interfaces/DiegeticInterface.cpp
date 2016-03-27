@@ -16,12 +16,20 @@ UDiegeticInterface::UDiegeticInterface()
     {
         InterfaceVisualBP = (UClass*)InterfaceVisual.Object->GeneratedClass;
     }
+
+    static ConstructorHelpers::FObjectFinder<UBlueprint> Widget(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Diegetic_Actor.Diegetic_Actor'"));
+    if (Widget.Object)
+    {
+        WidgetBP = (UClass*)Widget.Object->GeneratedClass;
+    }
 }
 
 void UDiegeticInterface::Init()
 {
     DiegeticModel = SpawnBP<AActor>(GWorld, HandScannerBP, FVector(0, 0, 10), FRotator(0, 0, 0));
     DiegeticModel->SetActorEnableCollision(false);
+    Interface3D = SpawnBP<AActor>(GWorld, WidgetBP, FVector(0, 0, 10), FRotator(0, 0, 0));
+    Interface3D->AttachRootComponentToActor(DiegeticModel, "Screen");
     OwningPlayer = UGameplayStatics::GetPlayerController(GWorld, 0);
     DiegeticModel->AttachRootComponentToActor(OwningPlayer->GetPawn(), "Scanner");
 }
