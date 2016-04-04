@@ -14,7 +14,6 @@ public:
     // Sets default values for this actor's properties
     AAsteroid();
     void Init(FVector Target);
-
     void Destroyed() override;
 
     // Called when the game starts or when spawned
@@ -24,16 +23,11 @@ public:
     virtual void Tick( float DeltaSeconds ) override;
 
     UFUNCTION()
-    virtual void OnCollision(AActor *SelfActor, AActor *OtherActor, FVector NormalImpulse, const FHitResult& Hit);
-    UFUNCTION()
     virtual void OnOverlap(AActor* OtherActor);
 
     void ShowMarker() { Marker->SetActorHiddenInGame(false); };
     void HideMarker() { Marker->SetActorHiddenInGame(true); };
 
-    UStaticMesh* AsteroidStaticMesh;
-    UPROPERTY(VisibleAnywhere, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
-    UStaticMeshComponent* AsteroidVisual;
     UPROPERTY(EditAnywhere, Category = "Marker", meta = (AllowPrivateAccess = "true"))
     TSubclassOf<AActor> MarkerBP;
 

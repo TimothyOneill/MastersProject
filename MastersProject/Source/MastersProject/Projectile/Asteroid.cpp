@@ -2,6 +2,7 @@
 
 #include "MastersProject.h"
 #include "Asteroid.h"
+#include "../Player/MainPlayer.h"
 #include "../MetricTracker.h"
 
 // Sets default values
@@ -9,15 +10,6 @@ AAsteroid::AAsteroid()
 {
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
-
-    AsteroidVisual = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-    AsteroidVisual->SetCastShadow(false);
-    RootComponent = AsteroidVisual;
-
-    if (AsteroidStaticMesh)
-    {
-        AsteroidVisual->SetStaticMesh(AsteroidStaticMesh);
-    }
 }
 
 void AAsteroid::Destroyed()
@@ -43,7 +35,6 @@ void AAsteroid::Init(FVector InitTarget)
 // Called when the game starts or when spawned
 void AAsteroid::BeginPlay()
 {
-    OnActorHit.AddDynamic(this, &AAsteroid::OnCollision);
     OnActorBeginOverlap.AddDynamic(this, &AAsteroid::OnOverlap);
     Super::BeginPlay();
 }
@@ -53,24 +44,19 @@ void AAsteroid::Tick( float DeltaTime )
 {
     Super::Tick( DeltaTime );
     FVector NewLocation = GetActorLocation() - (DirectionVector * Speed * DeltaTime);
-    SetActorLocation(NewLocation);
+    SetActorLocation(NewLocation, true);
 }
 
-void AAsteroid::OnCollision(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
-{
-    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid!"));
-    MetricTracker::Instance()->ReportDiscreteMetric("Hit", 1);
-    MetricTracker::Instance()->ClearSpecificDiscreteMetric("Streak");
-    MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "1,");
-    Destroy();
-}
-
-//Required due a bug I found in UE4 UE-26257
 void AAsteroid::OnOverlap(AActor* OtherActor)
 {
-    if (OtherActor && (OtherActor != this))
+    if (OtherActor->ActorHasTag("AsteroidCollision"))
     {
-        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deleting Asteroid that hit Platform!"));
+        if (OtherActor->IsA(AMainPlayer::StaticClass()))
+        {
+            MetricTracker::Instance()->ReportDiscreteMetric("Hit", 1);
+            MetricTracker::Instance()->ClearSpecificDiscreteMetric("Streak");
+            MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "1,");
+        }
         MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
         MetricTracker::Instance()->ReportDiscreteMetric("Streak", 1);
         MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "0,");

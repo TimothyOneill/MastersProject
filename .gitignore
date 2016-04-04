@@ -66,6 +66,3 @@ DerivedDataCache/*
 *.swp
 *.swo
 .ctrlp_cache/
-
-# Build Folder
-Content/
