@@ -32,7 +32,7 @@ void AMastersProjectGameMode::HandleMatchHasEnded()
 
 void AMastersProjectGameMode::RestartGameTimer()
 {
-    GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AMastersProjectGameMode::ChangeTestScenario, GameTimer, true);
+    GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AMastersProjectGameMode::TimerFunction, GameTimer, true);
 }
 
 void AMastersProjectGameMode::StopGameTimer()
@@ -45,19 +45,26 @@ void AMastersProjectGameMode::ChangeTestScenario()
     switch (*TestOrder.begin())
     {
     
-    case 0 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_DiegeticInterface), MetricTracker::Instance()->SetSectionName("Digetic Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+    case 0 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_DiegeticInterface), MetricTracker::Instance()->SetSectionName("Digetic Interface");
         break;
-    case 1 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NonDiegeticInterface), MetricTracker::Instance()->SetSectionName("Non Digetic Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+    case 1 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NonDiegeticInterface), MetricTracker::Instance()->SetSectionName("Non Digetic Interface");
         break;
-    case 2 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_MetaInterface), MetricTracker::Instance()->SetSectionName("Spatial Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+    case 2 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_MetaInterface), MetricTracker::Instance()->SetSectionName("Spatial Interface");
         break;
-    case 3 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_SpatialInterface), MetricTracker::Instance()->SetSectionName("Meta Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+    case 3 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_SpatialInterface), MetricTracker::Instance()->SetSectionName("Meta Interface");
         break;
-    case 4 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NoInterface), MetricTracker::Instance()->SetSectionName("No Interface"), MetricTracker::Instance()->WriteMetricsToFile();
+    case 4 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NoInterface), MetricTracker::Instance()->SetSectionName("No Interface");
         break;
     default : StopGameTimer(), SetMatchState(MatchState::WaitingPostMatch);
         break;
     }
+}
+
+void AMastersProjectGameMode::TimerFunction()
+{
+    MetricTracker::Instance()->WriteMetricsToFile();
+    MetricTracker::Instance()->ClearAllMetrics();
+    ChangeTestScenario();
 }
 
 void AMastersProjectGameMode::GenerateTestOrder()

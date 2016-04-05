@@ -1,9 +1,10 @@
 #pragma once
 #include "Projectile/Asteroid.h"
+#include "Player/Waypoint.h"
 #include "SpatialInterface.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class MASTERSPROJECT_API USpatialInterface : public UObject, public FTickableGameObject

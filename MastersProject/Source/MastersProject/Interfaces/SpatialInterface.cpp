@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #include "MastersProject.h"
 #include "SpatialInterface.h"
 
@@ -14,11 +13,21 @@ void USpatialInterface::HideMarkers()
     {
         ActorItr->HideMarker();
     }
+
+    for (TActorIterator<AWayPoint> ActorItr(GWorld); ActorItr; ++ActorItr)
+    {
+        ActorItr->HideMarker();
+    }
 }
 
 void USpatialInterface::Tick(float DeltaTime)
 {
     for (TActorIterator<AAsteroid> ActorItr(GWorld); ActorItr; ++ActorItr)
+    {
+        ActorItr->ShowMarker();
+    }
+
+    for (TActorIterator<AWayPoint> ActorItr(GWorld); ActorItr; ++ActorItr)
     {
         ActorItr->ShowMarker();
     }

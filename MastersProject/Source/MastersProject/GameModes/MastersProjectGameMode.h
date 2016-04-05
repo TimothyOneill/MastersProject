@@ -31,6 +31,7 @@ public:
     void RestartGameTimer();
     void StopGameTimer();
     void ChangeTestScenario();
+    void TimerFunction();
     void GenerateTestOrder();
 
 protected:
