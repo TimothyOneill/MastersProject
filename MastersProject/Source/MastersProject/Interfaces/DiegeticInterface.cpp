@@ -5,16 +5,16 @@
 
 UDiegeticInterface::UDiegeticInterface()
 {
-    static ConstructorHelpers::FObjectFinder<UBlueprint> HandScanner(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/HandScaner.HandScaner'"));
-    if (HandScanner.Object)
+    static ConstructorHelpers::FClassFinder<AActor> HandScanner(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/HandScaner.HandScaner_C'"));
+    if (HandScanner.Class != NULL)
     {
-        HandScannerBP = (UClass*)HandScanner.Object->GeneratedClass;
+        HandScannerBP = HandScanner.Class;
     }
 
-    static ConstructorHelpers::FObjectFinder<UBlueprint> Widget(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Diegetic_Actor.Diegetic_Actor'"));
-    if (Widget.Object)
+    static ConstructorHelpers::FClassFinder<AActor> Widget(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Diegetic_Actor.Diegetic_Actor_C'"));
+    if (Widget.Class != NULL)
     {
-        WidgetBP = (UClass*)Widget.Object->GeneratedClass;
+        WidgetBP = Widget.Class;
     }
 }
 

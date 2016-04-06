@@ -14,9 +14,11 @@ public:
     void EnableTick() { bTick = true; };
     void DisableTick() { bTick = false; };
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DiegeticModel")
+    //UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DiegeticModel")
+    UPROPERTY()
     TSubclassOf<AActor> HandScannerBP;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "3D-Widget")
+    //UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
+    UPROPERTY()
     TSubclassOf<AActor> WidgetBP;
 private:
     virtual void Tick(float DeltaTime) override {};

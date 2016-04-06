@@ -12,8 +12,9 @@ AWayPoint::AWayPoint()
     static ConstructorHelpers::FObjectFinder<UDataTable> WayPointLocations_BP(TEXT("DataTable'/Game/StarterContent/Blueprints/WayPointLocations.WayPointLocations'"));
     WayPointLocations = WayPointLocations_BP.Object;
 
-    //Have to apply a -1 here to remove the title row.
-    NumberOfWaypoints = WayPointLocations->GetTableData().Num()-1;
+    // Have to apply a -1 here to remove the title row.
+    // TODO Only Works With Editor Builds
+    NumberOfWaypoints = 5; //WayPointLocations->GetTableData().Num();
 }
 
 void AWayPoint::Destroyed()
@@ -50,7 +51,7 @@ void AWayPoint::Tick( float DeltaTime )
 
 void AWayPoint::OnOverlap(AActor* OtherActor)
 {
-    //Awfull boolean lock required due to engine bug with moving actors after an overlap.
+    // Awfull boolean lock required due to engine bug with moving actors after an overlap.
     if (OtherActor->IsA(AMainPlayer::StaticClass()) && !CollisionLock)
     {
         CollisionLock = true;
@@ -79,7 +80,6 @@ void AWayPoint::MoveNextLocation()
 {
     StartTime = FDateTime::Now().GetSecond();
     LocationsRow = WayPointLocations->FindRow<FWayPointLocations>(*FString::Printf(TEXT("Location%d"), CollisionCount), TEXT("WayPointLocations"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("X:%f Y:%f Z:%f"), LocationsRow->Location.X, LocationsRow->Location.Y, LocationsRow->Location.Z));
     SetActorLocation(LocationsRow->Location, false);
     if (Marker)
     {

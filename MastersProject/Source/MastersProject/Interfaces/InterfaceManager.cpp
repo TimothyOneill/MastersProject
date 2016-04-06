@@ -3,8 +3,6 @@
 
 InterfaceManager::InterfaceManager()
 {
-    SpatialInterface = NewObject<USpatialInterface>(USpatialInterface::StaticClass());
-    DiegeticInterface = NewObject<UDiegeticInterface>(UDiegeticInterface::StaticClass());
     static ConstructorHelpers::FClassFinder<AHUD> NonDiegeticInterfaceBP(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/NonDiegetic_Interface.NonDiegetic_Interface_C'"));
     if (NonDiegeticInterfaceBP.Class != NULL)
     {
@@ -29,9 +27,9 @@ void InterfaceManager::ChangeInterface(EInterfaceEnum NewInterface)
     CurrentInterface = NewInterface;
     switch (CurrentInterface)
     {
-    case EInterfaceEnum::IE_SpatialInterface : SpatialInterface->EnableTick();
+    case EInterfaceEnum::IE_SpatialInterface : SpatialInterface = NewObject<USpatialInterface>(AActor::StaticClass(),"SpatialInterface", EObjectFlags::RF_RootSet), SpatialInterface->EnableTick();
         break;
-    case EInterfaceEnum::IE_DiegeticInterface : DiegeticInterface->Init(), DiegeticInterface->EnableTick();
+    case EInterfaceEnum::IE_DiegeticInterface : DiegeticInterface = NewObject<UDiegeticInterface>(UObject::StaticClass(), "DiegeticInterface", EObjectFlags::RF_RootSet), DiegeticInterface->Init(), DiegeticInterface->EnableTick();
         break;
     case EInterfaceEnum::IE_NonDiegeticInterface : GWorld->GetFirstPlayerController()->ClientSetHUD(NonDiegeticInterface);
         break;

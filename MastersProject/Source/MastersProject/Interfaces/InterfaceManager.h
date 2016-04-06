@@ -25,7 +25,9 @@ public:
 private:
     EInterfaceEnum CurrentInterface;
 
+    UPROPERTY()
     USpatialInterface* SpatialInterface;
+    UPROPERTY()
     UDiegeticInterface* DiegeticInterface;
     TSubclassOf<AHUD> MetaInterface;
     TSubclassOf<AHUD> NonDiegeticInterface;

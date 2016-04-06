@@ -69,7 +69,7 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
     InputComponent->BindAction("PlayerInputAButton", IE_Pressed, this, &AMainPlayer::PauseGame).bExecuteWhenPaused = true;
 
-    //if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
+    if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
     {
         InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
         InputComponent->BindAxis("PlayerMovementRTX", this, &AMainPlayer::TurnCameraX);

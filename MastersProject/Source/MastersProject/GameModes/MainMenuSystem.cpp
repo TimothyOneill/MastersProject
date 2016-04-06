@@ -32,28 +32,24 @@ void AMainMenuSystem::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)
 
 void AMainMenuSystem::LaunchDefaultGame()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in NON STEREO"));
     EnableVirtualReality(false);
     UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
 }
 
 void AMainMenuSystem::LaunchVRGame()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in STEREO"));
     EnableVirtualReality(true);
     UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
 }
 
 void AMainMenuSystem::LaunchDefaultDemo()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in NON STEREO demo mode"));
     EnableVirtualReality(false);
     UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
 }
 
 void AMainMenuSystem::LaunchVRDemo()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Launching Game in STEREO demo mode"));
     EnableVirtualReality(true);
     UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
 }
