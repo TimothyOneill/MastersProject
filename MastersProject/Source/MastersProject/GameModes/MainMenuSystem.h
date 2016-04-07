@@ -1,14 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
-
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/GameMode.h"
 #include "MainMenuSystem.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MASTERSPROJECT_API AMainMenuSystem : public AGameMode
 {
@@ -21,7 +15,6 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
     void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
-
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
     void LaunchDefaultGame();
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
@@ -30,8 +23,7 @@ public:
     void LaunchDefaultDemo();
     UFUNCTION(BlueprintCallable, Category = "Main Menu")
     void LaunchVRDemo();
-
-    void EnableVirtualReality(bool val);
+    void EnableVirtualReality(bool Val);
 
 protected:
 

@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 #include "GameFramework/Actor.h"
 #include "Asteroid.h"
@@ -16,15 +15,11 @@ UCLASS()
 class MASTERSPROJECT_API AAsteroidSpawner : public AActor
 {
     GENERATED_BODY()
-
 public:
-    // Sets default values for this actor's properties
+
     AAsteroidSpawner();
 
-    // Called when the game starts or when spawned
     virtual void BeginPlay() override;
-
-    // Called every frame
     virtual void Tick( float DeltaSeconds ) override;
 
     void RestartSpawnTimer();
@@ -38,15 +33,18 @@ public:
     float SpawnTimer = 1.5f;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Settings")
     int32 SpawnRange = 5000;
-    FVector DefaultLocation;
-    FTimerHandle LocationTimerHandle;
-    FTimerHandle SpawnerTimerHandle;
-    std::vector<AAsteroid*> asteroids;
-    USphereComponent* SpawnerVisual;
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Target")
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
     AActor* target;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
     ETargetEnum TargetType;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyBPForCPP")
     TSubclassOf<AAsteroid> AsteroidBP;
+
+private :
+
+    FVector DefaultLocation;
+    FTimerHandle LocationTimerHandle;
+    FTimerHandle SpawnerTimerHandle;
+    std::vector<AAsteroid*> asteroids;
+    USphereComponent* SpawnerVisual;
 };

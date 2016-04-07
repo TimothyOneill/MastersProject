@@ -1,18 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
-
 #include "GameFramework/GameMode.h"
 #include "Interfaces/InterfaceManager.h"
 #include "MastersProjectDemoMode.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MASTERSPROJECT_API AMastersProjectDemoMode : public AGameMode
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 public:
 
     AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer);

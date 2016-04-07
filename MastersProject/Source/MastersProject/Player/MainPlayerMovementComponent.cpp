@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "MastersProject.h"
 #include "MainPlayerMovementComponent.h"
 
@@ -26,7 +24,6 @@ void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTic
         //Apply Basic Sliding if we bump something.
         if (hitDetection.IsValidBlockingHit())
         {
-
             SlideAlongSurface(movementVector, 1.0f - hitDetection.Time, hitDetection.Normal, hitDetection);
         }
     }

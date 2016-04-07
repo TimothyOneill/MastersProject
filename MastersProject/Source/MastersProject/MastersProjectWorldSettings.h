@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 #include "GameFramework/WorldSettings.h"
 #include "MastersProjectWorldSettings.generated.h"
@@ -26,7 +25,6 @@ struct FSpecificProjectSettings
 
     FSpecificProjectSettings() : GameTimer(300.0f), NumExperiments(5), File("DiscreteMetrics.txt") {}
 };
-
 
 UCLASS()
 class MASTERSPROJECT_API AMastersProjectWorldSettings : public AWorldSettings

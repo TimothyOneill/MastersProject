@@ -22,7 +22,6 @@ EInterfaceEnum InterfaceManager::GetInterface()
 
 void InterfaceManager::ChangeInterface(EInterfaceEnum NewInterface)
 {
-    
     ClearInterface();
     CurrentInterface = NewInterface;
     switch (CurrentInterface)

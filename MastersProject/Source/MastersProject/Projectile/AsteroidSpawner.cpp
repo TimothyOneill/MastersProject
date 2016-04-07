@@ -1,12 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "MastersProject.h"
 #include "AsteroidSpawner.h"
 #include <algorithm>
 
-// Sets default values
 AAsteroidSpawner::AAsteroidSpawner()
 {
-    // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
     //Required to place in the world.
     SpawnerVisual = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
@@ -14,7 +11,6 @@ AAsteroidSpawner::AAsteroidSpawner()
     SetActorEnableCollision(false);
 }
 
-// Called when the game starts or when spawned
 void AAsteroidSpawner::BeginPlay()
 {
     GetWorldTimerManager().SetTimer(LocationTimerHandle, this, &AAsteroidSpawner::CalculateNextPosition, SpawnTimer, true);
@@ -23,7 +19,6 @@ void AAsteroidSpawner::BeginPlay()
     Super::BeginPlay();
 }
 
-// Called every frame
 void AAsteroidSpawner::Tick( float DeltaTime )
 {
     Super::Tick( DeltaTime );
@@ -53,7 +48,6 @@ void AAsteroidSpawner::SpawnAsteroid()
         break;
     }
 
-    //Check to make sure asteroid was spawned correctly.
     if (CreatedAsteroid)
     {
         asteroids.push_back(CreatedAsteroid);

@@ -15,6 +15,7 @@ enum class EInterfaceEnum : uint8
 class InterfaceManager
 {
 public:
+
     InterfaceManager();
 
     EInterfaceEnum GetInterface();
@@ -23,6 +24,7 @@ public:
     void ClearInterface();
 
 private:
+
     EInterfaceEnum CurrentInterface;
 
     UPROPERTY()

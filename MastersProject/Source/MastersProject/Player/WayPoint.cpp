@@ -3,10 +3,8 @@
 #include "../MetricTracker.h"
 #include "WayPoint.h"
 
-// Sets default values
 AWayPoint::AWayPoint()
 {
-    // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
 
     static ConstructorHelpers::FObjectFinder<UDataTable> WayPointLocations_BP(TEXT("DataTable'/Game/StarterContent/Blueprints/WayPointLocations.WayPointLocations'"));
@@ -25,7 +23,6 @@ void AWayPoint::Destroyed()
     }
 }
 
-// Called when the game starts or when spawned
 void AWayPoint::BeginPlay()
 {
     OnActorBeginOverlap.AddDynamic(this, &AWayPoint::OnOverlap);
@@ -39,7 +36,6 @@ void AWayPoint::BeginPlay()
     Super::BeginPlay();
 }
 
-// Called every frame
 void AWayPoint::Tick( float DeltaTime )
 {
     if (CollisionLock)

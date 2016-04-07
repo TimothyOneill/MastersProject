@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "MastersProject.h"
 #include "DiegeticInterface.h"
 
@@ -30,7 +28,7 @@ void UDiegeticInterface::Init()
 
 bool UDiegeticInterface::IsTickable() const
 {
-    return bTick;
+    return CanTick;
 }
 
 TStatId UDiegeticInterface::GetStatId() const

@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "MastersProject.h"
 #include "MainMenuSystem.h"
 #include "IHeadMountedDisplay.h"
@@ -20,6 +18,7 @@ void AMainMenuSystem::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)
         CurrentWidget->RemoveFromViewport();
         CurrentWidget = nullptr;
     }
+
     if (NewWidgetClass != nullptr)
     {
         CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), NewWidgetClass);
@@ -54,11 +53,11 @@ void AMainMenuSystem::LaunchVRDemo()
     UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
 }
 
-void AMainMenuSystem::EnableVirtualReality(bool val)
+void AMainMenuSystem::EnableVirtualReality(bool Val)
 {
     if (GEngine->HMDDevice.IsValid())
     {
-        GEngine->HMDDevice->EnableHMD(val);
-        GEngine->HMDDevice->EnableStereo(val);
+        GEngine->HMDDevice->EnableHMD(Val);
+        GEngine->HMDDevice->EnableStereo(Val);
     }
 }

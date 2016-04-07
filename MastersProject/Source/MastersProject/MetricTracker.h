@@ -6,6 +6,7 @@
 class MetricTracker
 {
 public:
+
     static MetricTracker* Instance();
 
     void ReportDiscreteMetric(FString key, int value);
@@ -20,9 +21,11 @@ public:
     void SetSectionName(FString NewSectionName);
 
 protected:
+
     MetricTracker();
 
 private:
+
     static MetricTracker* _Instance;
 
     FString SectionName = "";

@@ -1,11 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "MastersProject.h"
 #include "SpatialInterface.h"
 
-USpatialInterface::USpatialInterface()
-{
-
-}
+USpatialInterface::USpatialInterface() {}
 
 void USpatialInterface::HideMarkers()
 {
@@ -35,7 +31,7 @@ void USpatialInterface::Tick(float DeltaTime)
 
 bool USpatialInterface::IsTickable() const
 {
-    return bTick;
+    return CanTick;
 }
 
 TStatId USpatialInterface::GetStatId() const
