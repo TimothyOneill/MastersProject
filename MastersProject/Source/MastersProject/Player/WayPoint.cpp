@@ -70,7 +70,7 @@ void AWayPoint::OnOverlap(AActor* OtherActor)
 
 void AWayPoint::ReportElapsedTime()
 {
-    PassedTime = FDateTime::Now().GetSecond() - StartTime;
+    PassedTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) - StartTime;
     FString WaypointString = FString::Printf(TEXT("Location%d"), CollisionCount);
     FString PassedTimeString = FString::Printf(TEXT("%d,"), PassedTime);
     MetricTracker::Instance()->ReportContinousMetric(WaypointString, PassedTimeString);
@@ -78,7 +78,7 @@ void AWayPoint::ReportElapsedTime()
 
 void AWayPoint::MoveNextLocation()
 {
-    StartTime = FDateTime::Now().GetSecond();
+    StartTime = UGameplayStatics::GetRealTimeSeconds(GetWorld());
     LocationsRow = WayPointLocations->FindRow<FWayPointLocations>(*FString::Printf(TEXT("Location%d"), CollisionCount), TEXT("WayPointLocations"));
     SetActorLocation(LocationsRow->Location, false);
     if (Marker)

@@ -67,7 +67,6 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
 {
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
-    InputComponent->BindAction("PlayerInputAButton", IE_Pressed, this, &AMainPlayer::PauseGame).bExecuteWhenPaused = true;
 
     if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
     {
@@ -110,22 +109,6 @@ void AMainPlayer::TurnCameraX(float AxisXValue)
     FRotator NewRotation = GetActorRotation();
     NewRotation.Yaw += AxisXValue;
     SetActorRotation(NewRotation);    
-}
-
-void AMainPlayer::PauseGame()
-{
-    APlayerController* const CurrentPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
-    if (CurrentPlayer)
-    {
-        if (CurrentPlayer->IsPaused())
-        {
-            CurrentPlayer->SetPause(false);
-        }
-        else
-        {
-            CurrentPlayer->SetPause(true);
-        }
-    }
 }
 
 void AMainPlayer::TurnOculus()
