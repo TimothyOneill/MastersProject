@@ -9,10 +9,6 @@ AWayPoint::AWayPoint()
 
     static ConstructorHelpers::FObjectFinder<UDataTable> WayPointLocations_BP(TEXT("DataTable'/Game/StarterContent/Blueprints/WayPointLocations.WayPointLocations'"));
     WayPointLocations = WayPointLocations_BP.Object;
-
-    // Have to apply a -1 here to remove the title row.
-    // TODO Only Works With Editor Builds
-    NumberOfWaypoints = 5; //WayPointLocations->GetTableData().Num();
 }
 
 void AWayPoint::Destroyed()
@@ -25,6 +21,7 @@ void AWayPoint::Destroyed()
 
 void AWayPoint::BeginPlay()
 {
+    NumberOfWaypoints = Cast<AMastersProjectWorldSettings>(GetWorld()->GetWorldSettings())->GetNumWaypoints();
     OnActorBeginOverlap.AddDynamic(this, &AWayPoint::OnOverlap);
     Marker = SpawnBP<AActor>(GetWorld(), MarkerBP, FVector(GetActorLocation().X, GetActorLocation().Y, 12), FRotator(0, 0, 0));
     if (Marker)

@@ -19,14 +19,19 @@ public:
 
     void ShowMarker() { Marker->SetActorHiddenInGame(false); };
     void HideMarker() { Marker->SetActorHiddenInGame(true); };
+    bool DetectPlayer();
+    void HasPlayerDodged();
 
     UPROPERTY(EditAnywhere, Category = "Marker", meta = (AllowPrivateAccess = "true"))
     TSubclassOf<AActor> MarkerBP;
 
 private:
 
-    FVector Target = FVector(0.0f,0.0f,0.0f);
+    FVector Target = FVector(0.0f, 0.0f, 0.0f);
     FVector DirectionVector = FVector(0.0f, 0.0f, 0.0f);
     AActor* Marker;
     const float Speed = 0.3f;
+    const float DetectionRadius = 300;
+    bool PlayerEnter = false;
+    bool PlayerExit = false;
 };

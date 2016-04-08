@@ -59,10 +59,16 @@ FVector AAsteroidSpawner::CalculateAroundTarget()
     FVector Origin;
     FVector BoundsExtent;
     target->GetActorBounds(false, Origin, BoundsExtent);
-    float XRange = BoundsExtent.X /2;
-    float YRange = BoundsExtent.Y /2;
+    float MaxRadius = (BoundsExtent.X < BoundsExtent.Y) ? BoundsExtent.X : BoundsExtent.Y;
+    float Radius = FMath::RandRange(0, MaxRadius);
 
-    return FVector(FMath::RandRange(Origin.X - XRange, Origin.X + XRange), FMath::RandRange(Origin.Y - YRange, Origin.Y + YRange), Origin.Z);
+    // Pick a random Point within a circle of the origin of the target.
+    FMath::SRandInit(FMath::Rand());
+    float Angle = 2 * PI * FMath::SRand();
+    float X = Radius * FMath::Cos(Angle);
+    float Y = Radius * FMath::Sin(Angle);
+
+    return FVector(X, Y, Origin.Z);
 }
 
 void AAsteroidSpawner::CalculateNextPosition()

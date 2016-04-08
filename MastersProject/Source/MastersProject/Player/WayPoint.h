@@ -1,6 +1,7 @@
 #pragma once
 #include "GameFramework/Actor.h"
 #include "WayPointLocations.h"
+#include "MastersProjectWorldSettings.h"
 #include "WayPoint.generated.h"
 
 UCLASS()

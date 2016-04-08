@@ -19,11 +19,15 @@ struct FSpecificProjectSettings
     UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
     int32 NumExperiments;
 
+    /**Used to set the number of waypoints the user has to traverse*/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
+    int32 NumWayPoints;
+
     /**Used to Set the filename to use for outputing the collected metrics*/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, config, Category = ExperimentSettings, AdvancedDisplay)
     FString File;
 
-    FSpecificProjectSettings() : GameTimer(300.0f), NumExperiments(5), File("DiscreteMetrics.txt") {}
+    FSpecificProjectSettings() : GameTimer(300.0f), NumExperiments(5), NumWayPoints(10), File("DiscreteMetrics.txt") {}
 };
 
 UCLASS()
@@ -48,6 +52,11 @@ public:
     int32 GetNumExperiments()
     {
         return ExperimentSettings.NumExperiments;
+    }
+    
+    int32 GetNumWaypoints()
+    {
+        return ExperimentSettings.NumWayPoints;
     }
 
     FString GetFile()

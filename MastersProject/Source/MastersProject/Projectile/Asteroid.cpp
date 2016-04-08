@@ -26,6 +26,7 @@ void AAsteroid::Init(FVector InitTarget)
     Marker->SetActorEnableCollision(false);
     Marker->SetActorHiddenInGame(true);
     SetActorRotation(Rotation);
+    MetricTracker::Instance()->ReportDiscreteMetric("TotalAsteroids", 1);
 }
 
 void AAsteroid::BeginPlay()
@@ -39,6 +40,7 @@ void AAsteroid::Tick( float DeltaTime )
     Super::Tick( DeltaTime );
     FVector NewLocation = GetActorLocation() - (DirectionVector * Speed * DeltaTime);
     SetActorLocation(NewLocation, true);
+    HasPlayerDodged();
 }
 
 void AAsteroid::OnOverlap(AActor* OtherActor)
@@ -48,12 +50,37 @@ void AAsteroid::OnOverlap(AActor* OtherActor)
         if (OtherActor->IsA(AMainPlayer::StaticClass()))
         {
             MetricTracker::Instance()->ReportDiscreteMetric("Hit", 1);
-            MetricTracker::Instance()->ClearSpecificDiscreteMetric("Streak");
-            MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "1,");
         }
-        MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
-        MetricTracker::Instance()->ReportDiscreteMetric("Streak", 1);
-        MetricTracker::Instance()->ReportContinousMetric("AllAsteroids", "0,");
+        if (PlayerExit)
+        {
+            MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
+        }
         Destroy();
+    }
+}
+
+bool AAsteroid::DetectPlayer()
+{
+    APawn* MainPlayer = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    FVector PlayerPosition = MainPlayer->GetActorLocation();
+
+    // Check if the player is in our detection radius ^2 is faster than Square Root
+    float PlayerPointX = FMath::Pow((PlayerPosition.X - Target.X), 2);
+    float PlayerPointY = FMath::Pow((PlayerPosition.Y - Target.Y), 2);
+
+    return (PlayerPointX + PlayerPointY) < FMath::Pow(DetectionRadius,2) ? false : true;
+}
+
+void AAsteroid::HasPlayerDodged()
+{
+    if (DetectPlayer())
+    {
+        PlayerEnter = true;
+        PlayerExit = false;
+    }
+    else if (PlayerEnter)
+    {
+        PlayerExit = true;
+        PlayerEnter = false;
     }
 }
