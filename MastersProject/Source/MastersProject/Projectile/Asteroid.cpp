@@ -65,10 +65,10 @@ bool AAsteroid::DetectPlayer()
     FVector PlayerPosition = MainPlayer->GetActorLocation();
 
     // Check if the player is in our detection radius ^2 is faster than Square Root
-    float PlayerPointX = FMath::Pow((PlayerPosition.X - Target.X), 2);
-    float PlayerPointY = FMath::Pow((PlayerPosition.Y - Target.Y), 2);
+    float PlayerPointX = FMath::Pow((Target.X - PlayerPosition.X), 2);
+    float PlayerPointY = FMath::Pow((Target.Y - PlayerPosition.Y), 2);
 
-    return (PlayerPointX + PlayerPointY) < FMath::Pow(DetectionRadius,2) ? false : true;
+    return (PlayerPointX + PlayerPointY) < FMath::Pow(DetectionRadius,2) ? true : false;
 }
 
 void AAsteroid::HasPlayerDodged()

@@ -31,7 +31,7 @@ private:
     FVector DirectionVector = FVector(0.0f, 0.0f, 0.0f);
     AActor* Marker;
     const float Speed = 0.3f;
-    const float DetectionRadius = 300;
+    const float DetectionRadius = 450;
     bool PlayerEnter = false;
     bool PlayerExit = false;
 };
