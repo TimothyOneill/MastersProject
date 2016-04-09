@@ -22,6 +22,9 @@ public:
     bool DetectPlayer();
     void HasPlayerDodged();
 
+    FString GetAsteroidID();
+    void SetAsteroidID(FString NewAsteroidID);
+
     UPROPERTY(EditAnywhere, Category = "Marker", meta = (AllowPrivateAccess = "true"))
     TSubclassOf<AActor> MarkerBP;
 
@@ -29,6 +32,7 @@ private:
 
     FVector Target = FVector(0.0f, 0.0f, 0.0f);
     FVector DirectionVector = FVector(0.0f, 0.0f, 0.0f);
+    FString AsteroidID;
     AActor* Marker;
     const float Speed = 0.3f;
     const float DetectionRadius = 450;

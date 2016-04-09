@@ -53,7 +53,8 @@ void AAsteroid::OnOverlap(AActor* OtherActor)
         }
         if (PlayerExit)
         {
-            MetricTracker::Instance()->ReportDiscreteMetric("Dodged", 1);
+            FString MetricTitle = AsteroidID + " - Dodged";
+            MetricTracker::Instance()->ReportDiscreteMetric(MetricTitle, 1);
         }
         Destroy();
     }
@@ -83,4 +84,14 @@ void AAsteroid::HasPlayerDodged()
         PlayerExit = true;
         PlayerEnter = false;
     }
+}
+
+FString AAsteroid::GetAsteroidID()
+{
+    return AsteroidID;
+}
+
+void AAsteroid::SetAsteroidID(FString NewAsteroidID)
+{
+    AsteroidID = NewAsteroidID;
 }

@@ -13,4 +13,5 @@ public:
 private:
 
     const float Gravity = 9.8f;
+    int32 LastTime;
 };

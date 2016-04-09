@@ -40,9 +40,9 @@ void AAsteroidSpawner::SpawnAsteroid()
 
     switch (TargetType)
     {
-    case ETargetEnum::TT_Direct : CreatedAsteroid->Init(target->GetActorLocation());
+    case ETargetEnum::TT_Direct : CreatedAsteroid->Init(target->GetActorLocation()), CreatedAsteroid->SetAsteroidID("Direct");
         break;
-    case ETargetEnum::TT_Around : CreatedAsteroid->Init(CalculateAroundTarget());
+    case ETargetEnum::TT_Around : CreatedAsteroid->Init(CalculateAroundTarget()), CreatedAsteroid->SetAsteroidID("Around");
         break;
     default: CreatedAsteroid->Init(FVector(0, 0, 0));
         break;

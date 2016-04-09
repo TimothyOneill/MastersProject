@@ -47,9 +47,9 @@ void AMastersProjectGameMode::ChangeTestScenario()
         break;
     case 1 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NonDiegeticInterface), MetricTracker::Instance()->SetSectionName("Non Digetic Interface");
         break;
-    case 2 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_MetaInterface), MetricTracker::Instance()->SetSectionName("Spatial Interface");
+    case 2 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_MetaInterface), MetricTracker::Instance()->SetSectionName("Meta Interface");
         break;
-    case 3 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_SpatialInterface), MetricTracker::Instance()->SetSectionName("Meta Interface");
+    case 3 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_SpatialInterface), MetricTracker::Instance()->SetSectionName("Spatial Interface");
         break;
     case 4 : TestOrder.erase(TestOrder.begin()), Interfaces->ChangeInterface(EInterfaceEnum::IE_NoInterface), MetricTracker::Instance()->SetSectionName("No Interface");
         break;
