@@ -27,14 +27,14 @@ public:
     void SpawnAsteroid();
     FVector CalculateAroundTarget();
     void CalculateNextPosition();
-    std::vector<AAsteroid*> const &GetAsteroids() const { return asteroids; };
+    std::vector<AAsteroid*> const &GetAsteroids() const { return Asteroids; };
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Settings")
     float SpawnTimer = 1.5f;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Settings")
     int32 SpawnRange = 5000;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Target")
-    AActor* target;
+    AActor* Target;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
     ETargetEnum TargetType;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyBPForCPP")
@@ -45,6 +45,6 @@ private :
     FVector DefaultLocation;
     FTimerHandle LocationTimerHandle;
     FTimerHandle SpawnerTimerHandle;
-    std::vector<AAsteroid*> asteroids;
+    std::vector<AAsteroid*> Asteroids;
     USphereComponent* SpawnerVisual;
 };

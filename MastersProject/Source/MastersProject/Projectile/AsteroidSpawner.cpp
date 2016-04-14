@@ -40,7 +40,7 @@ void AAsteroidSpawner::SpawnAsteroid()
 
     switch (TargetType)
     {
-    case ETargetEnum::TT_Direct : CreatedAsteroid->Init(target->GetActorLocation()), CreatedAsteroid->SetAsteroidID("Direct");
+    case ETargetEnum::TT_Direct : CreatedAsteroid->Init(Target->GetActorLocation()), CreatedAsteroid->SetAsteroidID("Direct");
         break;
     case ETargetEnum::TT_Around : CreatedAsteroid->Init(CalculateAroundTarget()), CreatedAsteroid->SetAsteroidID("Around");
         break;
@@ -50,7 +50,7 @@ void AAsteroidSpawner::SpawnAsteroid()
 
     if (CreatedAsteroid)
     {
-        asteroids.push_back(CreatedAsteroid);
+        Asteroids.push_back(CreatedAsteroid);
     }
 }
 
@@ -58,7 +58,7 @@ FVector AAsteroidSpawner::CalculateAroundTarget()
 {
     FVector Origin;
     FVector BoundsExtent;
-    target->GetActorBounds(false, Origin, BoundsExtent);
+    Target->GetActorBounds(false, Origin, BoundsExtent);
     float MaxRadius = (BoundsExtent.X < BoundsExtent.Y) ? BoundsExtent.X : BoundsExtent.Y;
     float Radius = FMath::RandRange(0, MaxRadius);
 
