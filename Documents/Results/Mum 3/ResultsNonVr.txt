@@ -1,0 +1,121 @@
+[Digetic Interface]
+Around - Dodged=33
+Direct - Dodged=100
+Hit=10
+TotalAsteroids=480
+Location10,
+8,
+Location2,
+7,
+Location3,
+14,
+Location4,
+6,
+Location5,
+17,
+Location6,
+12,
+Location7,
+7,
+Location8,
+9,
+Location9,
+9,
+PlayerMovement,
+0,0,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+[Spatial Interface]
+Around - Dodged=51
+Direct - Dodged=114
+Hit=10
+TotalAsteroids=476
+Location1,
+23,
+Location2,
+8,
+Location3,
+9,
+Location4,
+10,
+Location5,
+4,
+Location6,
+16,
+Location7,
+6,
+Location8,
+8,
+PlayerMovement,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,
+[No Interface]
+Around - Dodged=40
+Direct - Dodged=108
+Hit=7
+TotalAsteroids=480
+Location1,
+6,
+Location10,
+9,7,
+Location2,
+3,
+Location3,
+10,
+Location4,
+7,
+Location5,
+7,
+Location6,
+10,
+Location7,
+10,
+Location8,
+7,
+Location9,
+9,7,
+PlayerMovement,
+1,1,0,1,0,1,1,1,1,1,0,1,0,0,1,1,0,0,1,1,1,0,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,1,0,1,0,0,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,
+[Meta Interface]
+Around - Dodged=46
+Direct - Dodged=115
+Hit=6
+TotalAsteroids=483
+Location1,
+5,
+Location10,
+8,
+Location2,
+4,
+Location3,
+9,
+Location4,
+7,
+Location5,
+20,
+Location6,
+10,
+Location7,
+8,
+Location8,
+13,
+Location9,
+10,
+PlayerMovement,
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+[Non Digetic Interface]
+Around - Dodged=46
+Direct - Dodged=105
+Hit=8
+TotalAsteroids=478
+Location1,
+27,
+Location2,
+6,
+Location3,
+10,
+Location4,
+21,
+Location5,
+5,
+Location6,
+14,
+PlayerMovement,
+1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,0,1,1,0,1,1,0,1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,
