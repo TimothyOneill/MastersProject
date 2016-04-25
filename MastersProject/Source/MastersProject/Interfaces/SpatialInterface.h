@@ -1,6 +1,6 @@
 #pragma once
 #include "Projectile/Asteroid.h"
-#include "Player/Waypoint.h"
+#include "../Objectives/Waypoint.h"
 #include "SpatialInterface.generated.h"
 
 UCLASS()

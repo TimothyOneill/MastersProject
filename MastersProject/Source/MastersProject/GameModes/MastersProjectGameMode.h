@@ -1,8 +1,8 @@
 #pragma once
 #include "GameFramework/GameMode.h"
 #include <unordered_set>
-#include "MastersProjectWorldSettings.h"
-#include "MetricTracker.h"
+#include "../Utilities/MastersProjectWorldSettings.h"
+#include "../Utilities/MetricTracker.h"
 #include "Interfaces/InterfaceManager.h"
 #include "MastersProjectGameMode.generated.h"
 

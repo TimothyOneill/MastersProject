@@ -1,6 +1,6 @@
 #include "MastersProject.h"
-#include "MastersProjectWorldSettings.h"
-#include "MetricTracker.h"
+#include "../Utilities/MastersProjectWorldSettings.h"
+#include "../Utilities/MetricTracker.h"
 #include "MastersProjectDemoMode.h"
 
 AMastersProjectDemoMode::AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)

@@ -1,5 +1,5 @@
 #include "MastersProject.h"
-#include "../MetricTracker.h"
+#include "../Utilities/MetricTracker.h"
 #include "MainPlayerMovementComponent.h"
 
 void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
