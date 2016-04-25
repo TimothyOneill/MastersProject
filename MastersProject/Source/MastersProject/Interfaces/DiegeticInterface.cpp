@@ -3,13 +3,13 @@
 
 UDiegeticInterface::UDiegeticInterface()
 {
-    static ConstructorHelpers::FClassFinder<AActor> HandScanner(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/HandScaner.HandScaner_C'"));
+    static ConstructorHelpers::FClassFinder<AActor> HandScanner(TEXT("Blueprint'/Game/MastersProject/Blueprints/Actors/A_HandScanner.A_HandScanner_C'"));
     if (HandScanner.Class != NULL)
     {
         HandScannerBP = HandScanner.Class;
     }
 
-    static ConstructorHelpers::FClassFinder<AActor> Widget(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Diegetic_Actor.Diegetic_Actor_C'"));
+    static ConstructorHelpers::FClassFinder<AActor> Widget(TEXT("Blueprint'/Game/MastersProject/Blueprints/Actors/A_DiegeticInterface.A_DiegeticInterface_C'"));
     if (Widget.Class != NULL)
     {
         WidgetBP = Widget.Class;

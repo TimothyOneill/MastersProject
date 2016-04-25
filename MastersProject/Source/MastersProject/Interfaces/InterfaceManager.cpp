@@ -3,12 +3,12 @@
 
 InterfaceManager::InterfaceManager()
 {
-    static ConstructorHelpers::FClassFinder<AHUD> NonDiegeticInterfaceBP(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/NonDiegetic_Interface.NonDiegetic_Interface_C'"));
+    static ConstructorHelpers::FClassFinder<AHUD> NonDiegeticInterfaceBP(TEXT("Blueprint'/Game/MastersProject/Blueprints/HUDs/HUD_NonDiegetic.HUD_NonDiegetic_C'"));
     if (NonDiegeticInterfaceBP.Class != NULL)
     {
         NonDiegeticInterface = NonDiegeticInterfaceBP.Class;
     }
-    static ConstructorHelpers::FClassFinder<AHUD> MetaInterfaceBP(TEXT("Blueprint'/Game/StarterContent/Blueprints/Interfaces/Meta_Interface.Meta_Interface_C'"));
+    static ConstructorHelpers::FClassFinder<AHUD> MetaInterfaceBP(TEXT("Blueprint'/Game/MastersProject/Blueprints/HUDs/HUD_MetaInterface.HUD_MetaInterface_C'"));
     if (MetaInterfaceBP.Class != NULL)
     {
         MetaInterface = MetaInterfaceBP.Class;
