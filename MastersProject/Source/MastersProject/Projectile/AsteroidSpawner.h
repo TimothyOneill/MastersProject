@@ -4,6 +4,19 @@
 #include <vector>
 #include "AsteroidSpawner.generated.h"
 
+/**
+* Asteroid spawner manages the varaious asteroids its spawns and calculates the targets they aim for.
+
+* UProperty() allows the setting of the variable in the editor.
+
+* FTimerhandle manages how ofter an asteroid is spawned.
+
+* CalculateAroundTarget() calculates a point in a circle arounda centre point.
+* CalculateNextPosition() Calculates where the spawner should move to next in a half hemisphere.
+
+**/
+
+//Enum to outline the various types of Asteroids.
 UENUM(BlueprintType)
 enum class ETargetEnum : uint8
 {

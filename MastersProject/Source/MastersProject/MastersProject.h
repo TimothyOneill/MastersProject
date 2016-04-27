@@ -1,7 +1,8 @@
 #pragma once
 #include "Engine.h"
 
-//TODO AddSource
+// Global Template function to allow easy and neat spawning of Blueprint Actors into the world.
+// Taken from forum post http://tinyurl.com/zt8g769 credit to user Rama.
 template <typename SpawnWorldBP>
 FORCEINLINE SpawnWorldBP* SpawnBP(
     UWorld* TheWorld,

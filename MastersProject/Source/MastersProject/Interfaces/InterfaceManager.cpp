@@ -3,6 +3,7 @@
 
 InterfaceManager::InterfaceManager()
 {
+    //Non UClass() so The two huds must be set in this manner.
     static ConstructorHelpers::FClassFinder<AHUD> NonDiegeticInterfaceBP(TEXT("Blueprint'/Game/MastersProject/Blueprints/HUDs/HUD_NonDiegetic.HUD_NonDiegetic_C'"));
     if (NonDiegeticInterfaceBP.Class != NULL)
     {
@@ -20,6 +21,7 @@ EInterfaceEnum InterfaceManager::GetInterface()
     return CurrentInterface;
 }
 
+//Handles the changing of the interfaces, the interfaces have different constructions.
 void InterfaceManager::ChangeInterface(EInterfaceEnum NewInterface)
 {
     ClearInterface();
@@ -41,6 +43,7 @@ void InterfaceManager::ChangeInterface(EInterfaceEnum NewInterface)
     }
 }
 
+//Tidys up the current interface in the specific manner of that interface.
 void InterfaceManager::ClearInterface()
 {
     switch (CurrentInterface)

@@ -2,6 +2,7 @@
 #include "../Utilities/MetricTracker.h"
 #include "MainPlayerMovementComponent.h"
 
+// Allows a vector to be drawn in and performs the various movement calculations to it allowing for interchangable cohesive movement.
 void UMainPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);

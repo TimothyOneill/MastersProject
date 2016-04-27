@@ -2,6 +2,11 @@
 #include "GameFramework/PawnMovementComponent.h"
 #include "MainPlayerMovementComponent.generated.h"
 
+/**
+* MainPlayerComponent allows us to describe a players movement in serperate class
+* Many MovementComponents can be created and swapped in at runtime.
+**/
+
 UCLASS()
 class MASTERSPROJECT_API UMainPlayerMovementComponent : public UPawnMovementComponent
 {

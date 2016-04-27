@@ -6,6 +6,11 @@
 #include "Interfaces/InterfaceManager.h"
 #include "MastersProjectGameMode.generated.h"
 
+/**
+* MastersProjectGameMode Defines the rules for the main experiment
+* Randomises Interfaces at the start of each game.
+**/
+
 UCLASS()
 class MASTERSPROJECT_API AMastersProjectGameMode : public AGameMode
 {

@@ -4,6 +4,7 @@
 
 MetricTracker* MetricTracker::_Instance = 0;
 
+// Standard Singleton Declartion.
 MetricTracker* MetricTracker::Instance()
 {
     if (_Instance == 0)
@@ -20,6 +21,7 @@ MetricTracker::MetricTracker()
     FullPath = FilePath + FileName;
 }
 
+// Reports a single metric under current section header with the given unique key.
 void MetricTracker::ReportDiscreteMetric(FString key, int value)
 {
     std::map<FString, int>::iterator itr = DiscreteValues.find(key);
@@ -34,6 +36,7 @@ void MetricTracker::ReportDiscreteMetric(FString key, int value)
     }
 }
 
+//reports another metric under the given Key allowing for multiple values under one key in the current section header.
 void MetricTracker::ReportContinousMetric(FString key, FString value)
 {
     std::map<FString, FString>::iterator itr = ContinuousValues.find(key);
@@ -48,6 +51,7 @@ void MetricTracker::ReportContinousMetric(FString key, FString value)
     }
 }
 
+// Writes all metrics to file under the given section header.
 void MetricTracker::WriteMetricsToFile()
 {
     if (!File.is_open())
@@ -76,6 +80,7 @@ void MetricTracker::WriteMetricsToFile()
     File.close();
 }
 
+// Wipes the metrics buffers.
 void MetricTracker::ClearAllMetrics()
 {
     ContinuousValues.clear();

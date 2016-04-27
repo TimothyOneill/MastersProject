@@ -52,6 +52,7 @@ void AMainPlayer::BeginPlay()
 //Called every frame
 void AMainPlayer::Tick( float DeltaTime )
 {
+    //If we have a Oculus Attached and enabled allow rotational movement with the Oculus.
     if (GEngine->HMDDevice.IsValid() && GEngine->HMDDevice->IsStereoEnabled())
     {
         TurnOculus();
@@ -65,6 +66,7 @@ void AMainPlayer::SetupPlayerInputComponent(class UInputComponent* InputComponen
     InputComponent->BindAxis("PlayerMovementLTY", this, &AMainPlayer::MoveY);
     InputComponent->BindAxis("PlayerMovementLTX", this, &AMainPlayer::MoveX);
 
+    //When setting up the users input if the Oculus movement Disable head movement on the right joystick.
     if (GEngine->HMDDevice.IsValid() && !GEngine->HMDDevice->IsStereoEnabledOnNextFrame())
     {
         InputComponent->BindAxis("PlayerMovementRTY", this, &AMainPlayer::TurnCameraY);
@@ -108,6 +110,8 @@ void AMainPlayer::TurnCameraX(float AxisXValue)
     SetActorRotation(NewRotation);    
 }
 
+// Gets the HMD's current rotation and applys it the the player moveing it and its sub components.
+// Oculus handles users viewport seperatly elsewhere in the engine.
 void AMainPlayer::TurnOculus()
 {
     FQuat HMDOrientation;

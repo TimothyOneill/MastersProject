@@ -2,6 +2,18 @@
 #include "GameFramework/Actor.h"
 #include "Asteroid.generated.h"
 
+/**
+* Asteroid defines the projectiles the player has to dodge.
+
+* UProperty() allows the asteroids mesh to be set in the editor and used at runtime.
+
+* DetectPlayer() detects whether a player has avoided this given asteroid.
+* HasPlayerDodged() manages the booleans to signify a player dodging.
+
+* AsteroidID stores the Type of targetting this asteroid is partaking in.
+
+**/
+
 UCLASS()
 class MASTERSPROJECT_API AAsteroid : public AActor
 {

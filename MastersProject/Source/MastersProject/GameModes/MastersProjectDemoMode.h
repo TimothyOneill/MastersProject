@@ -3,6 +3,12 @@
 #include "Interfaces/InterfaceManager.h"
 #include "MastersProjectDemoMode.generated.h"
 
+/**
+* MastersProjectDemoMode Defines the rule set for the demo version for experiment
+* While similar to the main game mode allows for future work of interfactive tutorial
+* Or a more complex demo, due to it being its own seperate clas.
+**/
+
 UCLASS()
 class MASTERSPROJECT_API AMastersProjectDemoMode : public AGameMode
 {
@@ -11,7 +17,6 @@ public:
 
     AMastersProjectDemoMode(const FObjectInitializer& ObjectInitializer);
 
-    //Transitions to Waiting to Start.
     virtual void StartPlay() override;
     virtual void HandleMatchHasStarted();
     virtual void HandleMatchHasEnded();

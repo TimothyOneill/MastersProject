@@ -8,12 +8,14 @@ AMastersProjectDemoMode::AMastersProjectDemoMode(const FObjectInitializer& Objec
     Interfaces = new InterfaceManager();
 }
 
+//Called when the level loads.
 void AMastersProjectDemoMode::StartPlay()
 {
     Super::StartPlay();
     ChangeTestScenario();
 }
 
+//Called After Startplay when the match starts.
 void AMastersProjectDemoMode::HandleMatchHasStarted()
 {
     Super::HandleMatchHasStarted();
@@ -29,6 +31,7 @@ void AMastersProjectDemoMode::HandleMatchHasEnded()
     UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
 }
 
+//Resets the game timer responsible for changing the interfaces after X seconds.
 void AMastersProjectDemoMode::RestartGameTimer()
 {
     GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AMastersProjectDemoMode::ChangeTestScenario, GameTimer, true);
@@ -39,6 +42,7 @@ void AMastersProjectDemoMode::StopGameTimer()
     GetWorldTimerManager().ClearTimer(GameTimerHandle);
 }
 
+//Calls the interfaceManager with the Enum of the new interface.
 void AMastersProjectDemoMode::ChangeTestScenario()
 {
     switch (CurrentInterface)

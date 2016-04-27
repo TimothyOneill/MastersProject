@@ -3,6 +3,17 @@
 #include "GameFramework/GameMode.h"
 #include "MainMenuSystem.generated.h"
 
+/**
+* MainMenuSystem defines the functionality to launch both the VR and NON VR experiment
+* it also allows easy switching between widgest allowing for multple menu screens.
+
+* UFUNCTION(BlueprintCallable, Category = "Main Menu") - are callable in blueprints
+* allowing easy event driven scripting.
+
+* UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Main Menu") - allows the variable
+* to be set in the editor for easy of setting the default widget to intially load.
+**/
+
 UCLASS()
 class MASTERSPROJECT_API AMainMenuSystem : public AGameMode
 {

@@ -3,6 +3,16 @@
 #include "MainPlayerMovementComponent.h"
 #include "MainPlayer.generated.h"
 
+/**
+* MainPlayer extends pawn it lays out the how the user can navigate the world.
+
+* UPawnMovemntComponent allows us to change the players movement on the fly if future work requried it.
+* Allows for extentability.
+
+* UProperty() allows us to set the players model in the editor.
+
+**/
+
 UCLASS()
 class MASTERSPROJECT_API AMainPlayer : public APawn
 {

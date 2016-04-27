@@ -10,6 +10,7 @@ AWayPoint::AWayPoint()
     WayPointLocations = WayPointLocations_BP.Object;
 }
 
+//Tidys up its Spatial marker when destoryed.
 void AWayPoint::Destroyed()
 {
     if (Marker)
@@ -18,6 +19,7 @@ void AWayPoint::Destroyed()
     }
 }
 
+//Find out the number of waypoint locations and places the waypoint at the current location.
 void AWayPoint::BeginPlay()
 {
     NumberOfWaypoints = Cast<AMastersProjectWorldSettings>(GetWorld()->GetWorldSettings())->GetNumWaypoints();
@@ -43,7 +45,8 @@ void AWayPoint::Tick( float DeltaTime )
 
 void AWayPoint::OnOverlap(AActor* OtherActor)
 {
-    // Awfull boolean lock required due to engine bug with moving actors after an overlap.
+    // boolean lock required due to engine bug with moving actors after an overlap.
+    // see http://tinyurl.com/hgmybn3 4.11 patch notes
     if (OtherActor->IsA(AMainPlayer::StaticClass()) && !CollisionLock)
     {
         CollisionLock = true;
@@ -60,6 +63,7 @@ void AWayPoint::OnOverlap(AActor* OtherActor)
     }
 }
 
+// Waypoint Calculate the elapsed time between waypoints being collided with and reports the metric.
 void AWayPoint::ReportElapsedTime()
 {
     PassedTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) - StartTime;
@@ -68,6 +72,7 @@ void AWayPoint::ReportElapsedTime()
     MetricTracker::Instance()->ReportContinousMetric(WaypointString, PassedTimeString);
 }
 
+//Updates where the Waypoint should mvoe to after being hit.
 void AWayPoint::MoveNextLocation()
 {
     StartTime = UGameplayStatics::GetRealTimeSeconds(GetWorld());

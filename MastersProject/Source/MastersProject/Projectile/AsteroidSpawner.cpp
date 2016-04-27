@@ -5,12 +5,13 @@
 AAsteroidSpawner::AAsteroidSpawner()
 {
     PrimaryActorTick.bCanEverTick = true;
-    //Required to place in the world.
+    //Required to place in the world even tho invisible.
     SpawnerVisual = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
     RootComponent = SpawnerVisual;
     SetActorEnableCollision(false);
 }
 
+// Called when the level containing spawners loads, sets the various timers.
 void AAsteroidSpawner::BeginPlay()
 {
     GetWorldTimerManager().SetTimer(LocationTimerHandle, this, &AAsteroidSpawner::CalculateNextPosition, SpawnTimer, true);
@@ -24,6 +25,7 @@ void AAsteroidSpawner::Tick( float DeltaTime )
     Super::Tick( DeltaTime );
 }
 
+// Restarts the timer responsible for the spawning of the asteroids.
 void AAsteroidSpawner::RestartSpawnTimer()
 {
     GetWorldTimerManager().SetTimer(SpawnerTimerHandle, this, &AAsteroidSpawner::SpawnAsteroid, SpawnTimer, true);
@@ -34,6 +36,7 @@ void AAsteroidSpawner::StopSpawnTimer()
     GetWorldTimerManager().ClearTimer(SpawnerTimerHandle);
 }
 
+//Each Spawner type is set in editor here it creates the asteroids and sets their targets.
 void AAsteroidSpawner::SpawnAsteroid()
 {
     AAsteroid* CreatedAsteroid = SpawnBP<AAsteroid>(GetWorld(), AsteroidBP, GetActorLocation(), FRotator(0, 0, 0));
@@ -54,6 +57,7 @@ void AAsteroidSpawner::SpawnAsteroid()
     }
 }
 
+//Calculates around a given centre point.
 FVector AAsteroidSpawner::CalculateAroundTarget()
 {
     FVector Origin;
@@ -71,6 +75,7 @@ FVector AAsteroidSpawner::CalculateAroundTarget()
     return FVector(X, Y, Origin.Z);
 }
 
+//Moves the spawner to a point within a hemisphere of its starting location.
 void AAsteroidSpawner::CalculateNextPosition()
 {
     FVector NewLocation = DefaultLocation;

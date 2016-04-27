@@ -3,6 +3,7 @@
 
 USpatialInterface::USpatialInterface() {}
 
+//Hides all the markers on the various game entities.
 void USpatialInterface::HideMarkers()
 {
     for (TActorIterator<AAsteroid> ActorItr(GWorld); ActorItr; ++ActorItr)
@@ -16,6 +17,7 @@ void USpatialInterface::HideMarkers()
     }
 }
 
+//Shows all the markers on the various game entities.
 void USpatialInterface::Tick(float DeltaTime)
 {
     for (TActorIterator<AAsteroid> ActorItr(GWorld); ActorItr; ++ActorItr)

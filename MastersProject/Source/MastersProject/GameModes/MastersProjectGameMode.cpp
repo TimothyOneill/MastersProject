@@ -6,6 +6,7 @@ AMastersProjectGameMode::AMastersProjectGameMode(const FObjectInitializer& Objec
     Interfaces = new InterfaceManager();
 }
 
+//Called at the point of the level loading.
 void AMastersProjectGameMode::StartPlay()
 {
     Super::StartPlay();
@@ -14,6 +15,7 @@ void AMastersProjectGameMode::StartPlay()
     ChangeTestScenario();
 }
 
+//Called after level loading when the match begins.
 void AMastersProjectGameMode::HandleMatchHasStarted()
 {
     Super::HandleMatchHasStarted();
@@ -21,6 +23,7 @@ void AMastersProjectGameMode::HandleMatchHasStarted()
     RestartGameTimer();
 }
 
+//At the end of the experiment returns the user to the main menu.
 void AMastersProjectGameMode::HandleMatchHasEnded()
 {
     Super::HandleMatchHasEnded();
@@ -28,6 +31,7 @@ void AMastersProjectGameMode::HandleMatchHasEnded()
     UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
 }
 
+// Resets the timer responsible for changing the interface after X seconds.
 void AMastersProjectGameMode::RestartGameTimer()
 {
     GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AMastersProjectGameMode::TimerFunction, GameTimer, true);
@@ -38,6 +42,7 @@ void AMastersProjectGameMode::StopGameTimer()
     GetWorldTimerManager().ClearTimer(GameTimerHandle);
 }
 
+//Calls Interfacemanager to change the interface to the correct Enum also sets the section header in the Metric Tracker.
 void AMastersProjectGameMode::ChangeTestScenario()
 {
     switch (*TestOrder.begin())
@@ -58,6 +63,7 @@ void AMastersProjectGameMode::ChangeTestScenario()
     }
 }
 
+//Clears Writes stored metrics and clears them then changes the interface.
 void AMastersProjectGameMode::TimerFunction()
 {
     MetricTracker::Instance()->WriteMetricsToFile();
@@ -65,6 +71,7 @@ void AMastersProjectGameMode::TimerFunction()
     ChangeTestScenario();
 }
 
+//By using an unordered we can get one instance of every number between 0 and Num experiments in a random order.
 void AMastersProjectGameMode::GenerateTestOrder()
 {
     while (TestOrder.size() != NumExperiments)

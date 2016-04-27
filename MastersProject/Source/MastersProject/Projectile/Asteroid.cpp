@@ -16,6 +16,7 @@ void AAsteroid::Destroyed()
     }
 }
 
+//Init allows the asteroids to be Constructed at another time by their creator.
 void AAsteroid::Init(FVector InitTarget)
 {
     Target = InitTarget;
@@ -43,6 +44,7 @@ void AAsteroid::Tick( float DeltaTime )
     HasPlayerDodged();
 }
 
+//On overlapping checks what was collided with and updates the corresponding metrics and deletes it self.
 void AAsteroid::OnOverlap(AActor* OtherActor)
 {
     if (OtherActor->ActorHasTag("AsteroidCollision"))
@@ -72,6 +74,7 @@ bool AAsteroid::DetectPlayer()
     return (PlayerPointX + PlayerPointY) < FMath::Pow(DetectionRadius,2) ? true : false;
 }
 
+// Alters the boolean states as to whether the player has dodged leads to neater code.
 void AAsteroid::HasPlayerDodged()
 {
     if (DetectPlayer())

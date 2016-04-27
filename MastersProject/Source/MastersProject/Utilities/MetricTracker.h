@@ -3,6 +3,16 @@
 #include <iostream>
 #include <fstream>
 
+/**
+* MetricTracker is a singlton allowing it to be accesed anywhere
+* Allows setting of fileName,section names, metrics.
+
+* Stores metrics in a buffer and writes to file later when called
+* due to low amount of metrics being reported gives a smaller performance save
+* rather than writing 1-3 numbers to files every tick
+
+**/
+
 class MetricTracker
 {
 public:

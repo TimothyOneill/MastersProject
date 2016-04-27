@@ -2,6 +2,12 @@
 #include "GameFramework/WorldSettings.h"
 #include "MastersProjectWorldSettings.generated.h"
 
+/** 
+* MastersProjectSettings allows us to define variables in the project settings of the editor.
+* this Allows a designer to set otherwise hidden variables easily in the editor.
+* Avoids global const variables.
+**/
+
 USTRUCT()
 struct FSpecificProjectSettings
 {

@@ -4,6 +4,7 @@
 
 AMainMenuSystem::AMainMenuSystem(const FObjectInitializer& ObjectInitalizer) : Super(ObjectInitalizer) {}
 
+//Called on level load.
 void AMainMenuSystem::StartPlay()
 {
     Super::StartPlay();
@@ -11,6 +12,7 @@ void AMainMenuSystem::StartPlay()
     ChangeMenuWidget(StartingWidgetClass);
 }
 
+//Changes the current menu widget being displayed blueprint callable.
 void AMainMenuSystem::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)
 {
     if (CurrentWidget != nullptr)
@@ -32,27 +34,28 @@ void AMainMenuSystem::ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass)
 void AMainMenuSystem::LaunchDefaultGame()
 {
     EnableVirtualReality(false);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
+    UGameplayStatics::OpenLevel(GetWorld(), "L_Space");
 }
 
 void AMainMenuSystem::LaunchVRGame()
 {
     EnableVirtualReality(true);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene");
+    UGameplayStatics::OpenLevel(GetWorld(), "L_Space");
 }
 
 void AMainMenuSystem::LaunchDefaultDemo()
 {
     EnableVirtualReality(false);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
+    UGameplayStatics::OpenLevel(GetWorld(), "L_SpaceDemo");
 }
 
 void AMainMenuSystem::LaunchVRDemo()
 {
     EnableVirtualReality(true);
-    UGameplayStatics::OpenLevel(GetWorld(), "Space_Scene_Demo");
+    UGameplayStatics::OpenLevel(GetWorld(), "L_SpaceDemo");
 }
 
+//Helper function to enable and disable rendering to the VR headset.
 void AMainMenuSystem::EnableVirtualReality(bool Val)
 {
     if (GEngine->HMDDevice.IsValid())
