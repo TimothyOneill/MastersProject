@@ -80,6 +80,10 @@ select generate visual studio project files.
 
 Open the SLN file in visual studio you can now view the C++ code
 
+In the solution explorer open the Games folder right click MasterProject
+Set as start up project
+Make sure build configuartion is debugGameEditor Win64
+
 By building and running the project the editor will appear
 Here you can see blueprints and run the game.
 
