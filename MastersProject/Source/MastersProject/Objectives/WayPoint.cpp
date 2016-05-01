@@ -50,6 +50,7 @@ void AWayPoint::OnOverlap(AActor* OtherActor)
     if (OtherActor->IsA(AMainPlayer::StaticClass()) && !CollisionLock)
     {
         CollisionLock = true;
+        ReportElapsedTime();
         if (CollisionCount < NumberOfWaypoints)
         {
             CollisionCount++;
@@ -58,7 +59,6 @@ void AWayPoint::OnOverlap(AActor* OtherActor)
         {
             CollisionCount = 1;
         }
-        ReportElapsedTime();
         MoveNextLocation();
     }
 }
