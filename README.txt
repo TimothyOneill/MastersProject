@@ -6,7 +6,7 @@ Project Tested and works on following hardware.
 
 i5 3570k AMD HD 7670 windows 10 Dev PC
 
-i7 3470k GTX 960 windows 8 ECS1 Games Lab PC
+i7 4790k GTX 960 windows 8 ECS1 Games Lab PC
 
 #-------------------------------------------#
 Contents
